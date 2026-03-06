@@ -1,1532 +1,1690 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HAVEN — Conciergerie & Transport | French Riviera</title>
-<meta name="description" content="Haven, conciergerie de terrain et transport privé sur la Côte d'Azur. Gardiennage, assistance locative, VTC premium, runners. Cannes, Nice, Monaco.">
-<meta name="keywords" content="conciergerie Cannes, VTC Côte d'Azur, gardiennage résidence, transport privé Monaco, chauffeur Nice, Airbnb assistance locative">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0D1B3E;
-    --navy-light: #162347;
-    --gold: #C9A84C;
-    --gold-light: #D4B96A;
-    --white: #FFFFFF;
-    --border: rgba(201,168,76,0.3);
-  }
-
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family:'Montserrat',sans-serif;
-    background:var(--navy);
-    color:var(--white);
-    overflow-x:hidden;
-  }
-
-  /* ═══ LANGUE ═══ */
-  [data-lang] { display:none; }
-  [data-lang].active { display:block; }
-  [data-lang-inline] { display:none; }
-  [data-lang-inline].active { display:inline; }
-
-  /* ═══ NAVIGATION ═══ */
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:1000;
-    padding:18px 60px;
-    display:flex; align-items:center; justify-content:space-between;
-    background:rgba(13,27,62,0.97);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-    transition:all 0.3s;
-  }
-
-  .nav-logo {
-    display:flex; align-items:center; gap:14px;
-    text-decoration:none;
-  }
-
-  .nav-logo-img {
-    width:48px; height:48px;
-    object-fit:contain; border-radius:4px;
-  }
-
-  .nav-logo-text {
-    font-family:'Cormorant Garamond',serif;
-    font-size:22px; font-weight:600;
-    color:var(--gold); letter-spacing:4px;
-  }
-
-  .nav-logo-sub {
-    display:block; font-size:9px;
-    letter-spacing:3px; color:var(--gold-light);
-    opacity:0.65; margin-top:2px; font-weight:300;
-  }
-
-  .nav-links {
-    display:flex; align-items:center;
-    gap:34px; list-style:none;
-  }
-
-  .nav-links a {
-    color:rgba(255,255,255,0.78);
-    text-decoration:none; font-size:11px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:500; transition:color 0.3s;
-  }
-
-  .nav-links a:hover { color:var(--gold); }
-
-  .nav-right {
-    display:flex; align-items:center; gap:14px;
-  }
-
-  .lang-switcher { display:flex; gap:6px; }
-
-  .lang-btn {
-    background:none;
-    border:1px solid var(--border);
-    color:rgba(255,255,255,0.55);
-    font-size:10px; letter-spacing:1px;
-    padding:5px 10px; cursor:pointer;
-    font-family:'Montserrat',sans-serif;
-    transition:all 0.3s; border-radius:2px;
-  }
-
-  .lang-btn.active, .lang-btn:hover {
-    border-color:var(--gold); color:var(--gold);
-  }
-
-  .nav-cta {
-    background:var(--gold); color:var(--navy);
-    padding:10px 22px; font-size:10px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:600; text-decoration:none;
-    transition:all 0.3s; border-radius:2px;
-  }
-
-  .nav-cta:hover { background:var(--gold-light); }
-
-  .hamburger {
-    display:none; flex-direction:column;
-    gap:5px; cursor:pointer;
-    background:none; border:none; padding:4px;
-  }
-
-  .hamburger span {
-    display:block; width:24px; height:2px;
-    background:var(--gold); transition:all 0.3s;
-  }
-
-  /* ═══ HERO ═══ */
-  #accueil {
-    min-height:100vh;
-    display:flex; align-items:center;
-    justify-content:center; text-align:center;
-    position:relative; overflow:hidden;
-    padding:140px 40px 100px;
-  }
-
-  .hero-bg {
-    position:absolute; inset:0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%),
-      linear-gradient(135deg, #0D1B3E 0%, #162347 50%, #0D1B3E 100%);
-  }
-
-  .hero-pattern {
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
-    background-size:60px 60px;
-  }
-
-  .hero-content {
-    position:relative; z-index:2;
-    max-width:820px;
-  }
-
-  .hero-badge {
-    display:inline-flex; align-items:center; gap:10px;
-    border:1px solid var(--border);
-    padding:8px 20px; margin-bottom:38px;
-    font-size:10px; letter-spacing:3px;
-    color:var(--gold); text-transform:uppercase;
-  }
-
-  .hero-badge::before, .hero-badge::after {
-    content:''; width:20px; height:1px;
-    background:var(--gold); opacity:0.5;
-  }
-
-  .hero-logo-large {
-    width:150px; height:150px;
-    object-fit:contain; margin-bottom:28px;
-    filter:drop-shadow(0 0 40px rgba(201,168,76,0.2));
-    border-radius:8px;
-  }
-
-  .hero-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(52px,9vw,100px);
-    font-weight:300; letter-spacing:18px;
-    color:var(--gold); line-height:1; margin-bottom:10px;
-  }
-
-  .hero-subtitle {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(12px,1.8vw,16px);
-    font-weight:300; letter-spacing:6px;
-    color:rgba(255,255,255,0.5);
-    text-transform:uppercase;
-  }
-
-  .hero-divider {
-    width:60px; height:1px;
-    background:var(--gold);
-    margin:28px auto; opacity:0.5;
-  }
-
-  .hero-tagline {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(15px,1.8vw,19px);
-    font-weight:300; font-style:italic;
-    color:rgba(255,255,255,0.72);
-    line-height:1.85; max-width:560px;
-    margin:0 auto 50px;
-  }
-
-  .hero-actions {
-    display:flex; gap:16px;
-    justify-content:center; flex-wrap:wrap;
-  }
-
-  .btn-primary {
-    background:var(--gold); color:var(--navy);
-    padding:16px 36px; font-size:11px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:600; text-decoration:none;
-    transition:all 0.3s; border-radius:2px;
-    display:inline-block;
-  }
-
-  .btn-primary:hover {
-    background:var(--gold-light);
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(201,168,76,0.3);
-  }
-
-  .btn-secondary {
-    border:1px solid var(--gold); color:var(--gold);
-    padding:16px 36px; font-size:11px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:500; text-decoration:none;
-    transition:all 0.3s; border-radius:2px;
-    display:inline-block;
-  }
-
-  .btn-secondary:hover {
-    background:rgba(201,168,76,0.1);
-    transform:translateY(-2px);
-  }
-
-  .hero-stats {
-    display:flex; justify-content:center;
-    gap:60px; margin-top:70px;
-    padding-top:48px;
-    border-top:1px solid var(--border);
-    flex-wrap:wrap;
-  }
-
-  .stat { text-align:center; }
-
-  .stat-number {
-    font-family:'Cormorant Garamond',serif;
-    font-size:44px; font-weight:300;
-    color:var(--gold); line-height:1;
-  }
-
-  .stat-label {
-    font-size:9px; letter-spacing:2px;
-    color:rgba(255,255,255,0.42);
-    text-transform:uppercase; margin-top:6px;
-  }
-
-  .scroll-indicator {
-    position:absolute; bottom:34px;
-    left:50%; transform:translateX(-50%);
-    display:flex; flex-direction:column;
-    align-items:center;
-    animation:bounce 2.5s infinite;
-  }
-
-  .scroll-line {
-    width:1px; height:44px;
-    background:linear-gradient(to bottom, var(--gold), transparent);
-  }
-
-  @keyframes bounce {
-    0%,100% { transform:translateX(-50%) translateY(0); }
-    50% { transform:translateX(-50%) translateY(8px); }
-  }
-
-  /* ═══ SECTION COMMONS ═══ */
-  .section-header {
-    text-align:center;
-    padding:100px 60px 60px;
-    max-width:1200px;
-    margin:0 auto;
-  }
-
-  .section-badge {
-    font-size:10px; letter-spacing:4px;
-    color:var(--gold); text-transform:uppercase;
-    margin-bottom:14px; display:block;
-  }
-
-  .section-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(34px,5vw,54px);
-    font-weight:300; color:var(--white);
-    margin-bottom:16px; line-height:1.15;
-  }
-
-  .section-title span { color:var(--gold); }
-
-  .gold-line {
-    width:50px; height:1px;
-    background:var(--gold);
-    margin:16px auto; opacity:0.5;
-  }
-
-  .section-desc {
-    font-size:14px; color:rgba(255,255,255,0.52);
-    max-width:520px; margin:0 auto;
-    line-height:1.85; font-weight:300;
-  }
-
-  /* ═══ SERVICES ═══ */
-  #services { background:var(--navy-light); padding-bottom:100px; }
-
-  .services-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-    gap:2px;
-    max-width:1200px; margin:0 auto;
-    padding:0 60px;
-  }
-
-  .service-card {
-    background:var(--navy);
-    padding:46px 36px;
-    border:1px solid var(--border);
-    transition:all 0.4s;
-    position:relative; overflow:hidden;
-    display:flex; flex-direction:column;
-  }
-
-  .service-card::before {
-    content:''; position:absolute;
-    top:0; left:0; width:2px; height:0;
-    background:var(--gold); transition:height 0.4s;
-  }
-
-  .service-card:hover::before { height:100%; }
-
-  .service-card:hover {
-    transform:translateY(-4px);
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
-  }
-
-  .service-number {
-    font-family:'Cormorant Garamond',serif;
-    font-size:11px; color:var(--gold);
-    letter-spacing:3px; margin-bottom:16px; opacity:0.6;
-  }
-
-  .service-icon { font-size:26px; margin-bottom:16px; display:block; }
-
-  .service-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:23px; font-weight:400;
-    color:var(--white); margin-bottom:12px;
-    line-height:1.2;
-  }
-
-  .service-desc {
-    font-size:13px; color:rgba(255,255,255,0.5);
-    line-height:1.85; font-weight:300;
-    margin-bottom:22px; flex:1;
-  }
-
-  .service-price {
-    font-size:12px; color:var(--gold);
-    letter-spacing:1px; font-weight:500;
-    border-top:1px solid var(--border);
-    padding-top:14px;
-  }
-
-  /* Zones */
-  .zones-section {
-    max-width:1200px; margin:80px auto 0;
-    padding:0 60px; text-align:center;
-  }
-
-  .zones-grid {
-    display:flex; flex-wrap:wrap;
-    justify-content:center; gap:10px;
-    margin-top:28px;
-  }
-
-  .zone-tag {
-    border:1px solid var(--border);
-    padding:10px 24px; font-size:11px;
-    letter-spacing:2px;
-    color:rgba(255,255,255,0.62);
-    text-transform:uppercase; transition:all 0.3s;
-  }
-
-  .zone-tag:hover { border-color:var(--gold); color:var(--gold); }
-
-  /* ═══ TARIFS ═══ */
-  #tarifs { background:var(--navy); padding-bottom:100px; }
-
-  .tarifs-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:22px;
-    max-width:1200px; margin:0 auto;
-    padding:0 60px;
-  }
-
-  .tarif-block {
-    border:1px solid var(--border);
-    padding:32px; background:var(--navy-light);
-    border-radius:2px; transition:border-color 0.3s;
-  }
-
-  .tarif-block:hover { border-color:var(--gold); }
-
-  .tarif-block-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:20px; color:var(--gold);
-    margin-bottom:20px; padding-bottom:14px;
-    border-bottom:1px solid var(--border);
-    display:flex; align-items:center; gap:10px;
-  }
-
-  .tarif-row {
-    display:flex; justify-content:space-between;
-    align-items:center; padding:9px 0;
-    border-bottom:1px solid rgba(201,168,76,0.08);
-    font-size:13px;
-  }
-
-  .tarif-row:last-of-type { border-bottom:none; }
-  .tarif-sector { color:rgba(255,255,255,0.62); font-weight:300; }
-  .tarif-price { color:var(--gold); font-weight:500; }
-
-  .tarif-note {
-    font-size:11px; color:rgba(255,255,255,0.34);
-    margin-top:14px; font-style:italic; line-height:1.6;
-  }
-
-  /* ═══ À PROPOS ═══ */
-  #apropos { background:var(--navy-light); padding-bottom:100px; }
-
-  .apropos-inner {
-    max-width:1200px; margin:0 auto;
-    padding:0 60px;
-    display:grid; grid-template-columns:1fr 1fr;
-    gap:80px; align-items:start;
-  }
-
-  .apropos-text {
-    font-size:13px; color:rgba(255,255,255,0.56);
-    line-height:1.95; font-weight:300; margin-bottom:18px;
-  }
-
-  .valeurs-list { list-style:none; }
-
-  .valeur-item {
-    display:flex; gap:18px;
-    padding:22px 0;
-    border-bottom:1px solid var(--border);
-    align-items:flex-start;
-  }
-
-  .valeur-item:last-child { border-bottom:none; }
-
-  .valeur-icon {
-    width:34px; height:34px;
-    border:1px solid var(--gold); border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-size:13px; flex-shrink:0; color:var(--gold);
-  }
-
-  .valeur-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:18px; color:var(--gold); margin-bottom:4px;
-  }
-
-  .valeur-desc {
-    font-size:12px; color:rgba(255,255,255,0.46);
-    line-height:1.7; font-weight:300;
-  }
-
-  /* ═══ CONTACT ═══ */
-  #contact { background:var(--navy); padding-bottom:100px; }
-
-  .contact-inner {
-    max-width:900px; margin:0 auto; padding:0 60px;
-  }
-
-  .contact-grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-  }
-
-  .contact-block-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px; color:var(--gold); margin-bottom:28px;
-  }
-
-  .contact-item {
-    display:flex; align-items:flex-start;
-    gap:14px; margin-bottom:22px;
-  }
-
-  .contact-item-icon {
-    width:38px; height:38px;
-    border:1px solid var(--border);
-    display:flex; align-items:center;
-    justify-content:center;
-    font-size:15px; flex-shrink:0; border-radius:2px;
-  }
-
-  .contact-item-text {
-    font-size:13px; color:rgba(255,255,255,0.65);
-    font-weight:300; line-height:1.65;
-  }
-
-  .contact-item-text strong {
-    color:rgba(255,255,255,0.85); font-weight:500;
-    display:block; margin-bottom:2px;
-  }
-
-  .contact-item-text a {
-    color:var(--gold); text-decoration:none;
-    transition:opacity 0.3s;
-  }
-
-  .contact-item-text a:hover { opacity:0.8; }
-
-  .contact-actions {
-    display:flex; flex-direction:column;
-    gap:12px; margin-top:30px;
-  }
-
-  .btn-whatsapp {
-    display:flex; align-items:center; gap:10px;
-    background:#25D366; color:white;
-    padding:16px 28px; font-size:11px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:600; text-decoration:none;
-    transition:all 0.3s; border-radius:2px;
-    justify-content:center;
-  }
-
-  .btn-whatsapp:hover {
-    background:#1ebe5d;
-    transform:translateY(-2px);
-    box-shadow:0 8px 24px rgba(37,211,102,0.35);
-  }
-
-  .btn-email {
-    display:flex; align-items:center; gap:10px;
-    background:transparent;
-    border:1px solid var(--gold);
-    color:var(--gold);
-    padding:16px 28px; font-size:11px;
-    letter-spacing:2px; text-transform:uppercase;
-    font-weight:500; text-decoration:none;
-    transition:all 0.3s; border-radius:2px;
-    justify-content:center;
-  }
-
-  .btn-email:hover {
-    background:rgba(201,168,76,0.1);
-    transform:translateY(-2px);
-  }
-
-  /* Carte droite contact */
-  .contact-card {
-    border:1px solid var(--border);
-    padding:36px;
-    background:var(--navy-light);
-    border-radius:2px;
-    display:flex; flex-direction:column;
-    gap:24px;
-  }
-
-  .contact-card-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:22px; color:var(--gold);
-    padding-bottom:16px;
-    border-bottom:1px solid var(--border);
-  }
-
-  .contact-card-text {
-    font-size:13px; color:rgba(255,255,255,0.55);
-    line-height:1.85; font-weight:300;
-  }
-
-  .response-badge {
-    display:inline-flex; align-items:center; gap:8px;
-    border:1px solid var(--border);
-    padding:10px 18px; font-size:11px;
-    color:var(--gold); letter-spacing:1px;
-    border-radius:2px;
-  }
-
-  .response-dot {
-    width:8px; height:8px;
-    background:#2ECC71; border-radius:50%;
-    animation:pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:0.5; transform:scale(1.3); }
-  }
-
-  /* ═══ WHATSAPP FLOAT ═══ */
-  .whatsapp-float {
-    position:fixed; bottom:28px; right:28px;
-    z-index:999; width:56px; height:56px;
-    background:#25D366; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 4px 20px rgba(37,211,102,0.4);
-    text-decoration:none; transition:all 0.3s;
-  }
-
-  .whatsapp-float:hover {
-    transform:scale(1.1);
-    box-shadow:0 8px 30px rgba(37,211,102,0.55);
-  }
-
-  .whatsapp-float svg { width:26px; height:26px; fill:white; }
-
-  /* ═══ FOOTER ═══ */
-  footer {
-    background:#070E20; padding:50px 60px;
-    text-align:center;
-    border-top:1px solid var(--border);
-  }
-
-  .footer-logo {
-    font-family:'Cormorant Garamond',serif;
-    font-size:30px; color:var(--gold);
-    letter-spacing:10px; margin-bottom:10px;
-  }
-
-  .footer-sub {
-    font-size:10px; letter-spacing:3px;
-    color:rgba(255,255,255,0.26);
-    text-transform:uppercase; margin-bottom:28px;
-  }
-
-  .footer-links {
-    display:flex; justify-content:center;
-    gap:28px; list-style:none;
-    margin-bottom:28px; flex-wrap:wrap;
-  }
-
-  .footer-links a {
-    color:rgba(255,255,255,0.32); text-decoration:none;
-    font-size:10px; letter-spacing:2px;
-    text-transform:uppercase; transition:color 0.3s;
-  }
-
-  .footer-links a:hover { color:var(--gold); }
-
-  .footer-copy { font-size:11px; color:rgba(255,255,255,0.16); }
-
-  /* ═══ RESPONSIVE ═══ */
-  @media (max-width:900px) {
-    nav { padding:14px 20px; }
-    .nav-links { display:none; }
-    .nav-links.open {
-      display:flex; flex-direction:column;
-      position:fixed; top:76px; left:0; right:0;
-      background:var(--navy);
-      padding:26px 24px; gap:20px;
-      border-bottom:1px solid var(--border); z-index:999;
+  <!-- ═══════════════════════════════════════
+       META & SEO
+  ═══════════════════════════════════════ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Primary -->
+  <title>HAVEN — Conciergerie & Transport Privé | Cannes, Côte d'Azur</title>
+  <meta name="description" content="Haven, conciergerie de terrain premium sur la Côte d'Azur. Gardiennage résidence secondaire, assistance locative Airbnb, transport VTC privé, runners. Cannes, Nice, Monaco, Antibes. 7j/7.">
+  <meta name="keywords" content="conciergerie Cannes, VTC Côte d'Azur, gardiennage résidence secondaire, transport privé Monaco, chauffeur Nice, assistance locative Airbnb, runners Cannes, conciergerie entreprise Sophia-Antipolis">
+  <meta name="author" content="Haven SAS — Théo Beric">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://havenconciergerie.com">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://havenconciergerie.com">
+  <meta property="og:title" content="HAVEN — Conciergerie & Transport Privé | French Riviera">
+  <meta property="og:description" content="Votre allié de confiance sur la Côte d'Azur. Gardiennage, assistance locative, VTC privé, runners. Cannes, Nice, Monaco. 7j/7.">
+  <meta property="og:image" content="https://havenconciergerie.com/logo-haven.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:locale:alternate" content="ru_RU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HAVEN — Conciergerie & Transport Privé | French Riviera">
+  <meta name="twitter:description" content="Votre allié de confiance sur la Côte d'Azur. Gardiennage, assistance locative, VTC privé, runners.">
+  <meta name="twitter:image" content="https://havenconciergerie.com/logo-haven.jpg">
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Haven — Conciergerie & Transport",
+    "description": "Conciergerie de terrain premium et transport privé sur la Côte d'Azur. Gardiennage, assistance locative, VTC, runners.",
+    "url": "https://havenconciergerie.com",
+    "logo": "https://havenconciergerie.com/logo-haven.jpg",
+    "image": "https://havenconciergerie.com/logo-haven.jpg",
+    "telephone": "+33679462165",
+    "email": "contact@havenconciergerie.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cannes",
+      "addressRegion": "Alpes-Maritimes",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "43.5528",
+      "longitude": "7.0174"
+    },
+    "openingHours": "Mo-Su 00:00-23:59",
+    "priceRange": "€€€",
+    "areaServed": ["Cannes", "Nice", "Monaco", "Antibes", "Mougins", "Sophia-Antipolis"],
+    "serviceType": ["Conciergerie", "Transport VTC", "Gardiennage", "Assistance locative"],
+    "founder": {
+      "@type": "Person",
+      "name": "Théo Beric"
     }
-    .hamburger { display:flex; }
-    .section-header { padding:70px 24px 50px; }
-    .services-grid { padding:0 24px; grid-template-columns:1fr; }
-    .tarifs-grid { padding:0 24px; grid-template-columns:1fr; }
-    .apropos-inner { grid-template-columns:1fr; gap:40px; padding:0 24px; }
-    .contact-inner { padding:0 24px; }
-    .contact-grid { grid-template-columns:1fr; gap:36px; }
-    .zones-section { padding:0 24px; }
-    .hero-stats { gap:24px; }
-    footer { padding:40px 24px; }
   }
-</style>
+  </script>
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <style>
+    /* ═══════════════════════════════════════
+       CSS VARIABLES & RESET
+    ═══════════════════════════════════════ */
+    :root {
+      --navy:        #0D1B3E;
+      --navy-light:  #162347;
+      --navy-dark:   #080F22;
+      --gold:        #C9A84C;
+      --gold-light:  #D4B96A;
+      --gold-dim:    rgba(201,168,76,0.3);
+      --white:       #FFFFFF;
+      --text-muted:  rgba(255,255,255,0.55);
+      --text-dim:    rgba(255,255,255,0.35);
+      --border:      rgba(201,168,76,0.25);
+      --transition:  0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; font-size:16px; }
+
+    body {
+      font-family:'Montserrat',sans-serif;
+      background:var(--navy);
+      color:var(--white);
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    img { max-width:100%; height:auto; display:block; }
+    a { color:inherit; text-decoration:none; }
+    ul { list-style:none; }
+    button { cursor:pointer; font-family:inherit; }
+
+    /* ── LANGUE ── */
+    [data-lang]        { display:none; }
+    [data-lang].active { display:block; }
+    [data-lang-i]        { display:none; }
+    [data-lang-i].active { display:inline; }
+
+    /* ═══════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════ */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      padding:18px 60px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(13,27,62,0.96);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      transition:padding var(--transition), box-shadow var(--transition);
+      will-change:transform;
+    }
+
+    .nav.scrolled {
+      padding:12px 60px;
+      box-shadow:0 4px 40px rgba(0,0,0,0.5);
+    }
+
+    .nav-logo {
+      display:flex; align-items:center; gap:14px;
+    }
+
+    .nav-logo-img {
+      width:46px; height:46px;
+      object-fit:contain; border-radius:4px;
+      transition:transform var(--transition);
+    }
+
+    .nav-logo:hover .nav-logo-img { transform:scale(1.05); }
+
+    .nav-logo-name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:21px; font-weight:600;
+      color:var(--gold); letter-spacing:4px;
+      line-height:1;
+    }
+
+    .nav-logo-sub {
+      display:block; font-size:8.5px;
+      letter-spacing:3px; color:var(--gold-light);
+      opacity:0.6; margin-top:3px; font-weight:300;
+    }
+
+    .nav-links {
+      display:flex; align-items:center; gap:32px;
+    }
+
+    .nav-links a {
+      font-size:10.5px; letter-spacing:2px;
+      text-transform:uppercase; font-weight:500;
+      color:rgba(255,255,255,0.72);
+      transition:color var(--transition);
+      position:relative;
+    }
+
+    .nav-links a::after {
+      content:''; position:absolute;
+      bottom:-3px; left:0; right:100%;
+      height:1px; background:var(--gold);
+      transition:right var(--transition);
+    }
+
+    .nav-links a:hover { color:var(--gold); }
+    .nav-links a:hover::after { right:0; }
+
+    .nav-right { display:flex; align-items:center; gap:12px; }
+
+    .lang-switcher { display:flex; gap:5px; }
+
+    .lang-btn {
+      background:none; border:1px solid var(--border);
+      color:rgba(255,255,255,0.5);
+      font-size:9.5px; letter-spacing:1px;
+      padding:5px 9px; border-radius:2px;
+      transition:all var(--transition);
+    }
+
+    .lang-btn.active,
+    .lang-btn:hover {
+      border-color:var(--gold); color:var(--gold);
+    }
+
+    .nav-cta {
+      background:var(--gold); color:var(--navy);
+      padding:9px 20px; font-size:9.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      font-weight:600; border-radius:2px;
+      transition:all var(--transition);
+    }
+
+    .nav-cta:hover {
+      background:var(--gold-light);
+      box-shadow:0 4px 20px rgba(201,168,76,0.4);
+    }
+
+    .hamburger {
+      display:none; flex-direction:column;
+      gap:5px; background:none; border:none; padding:4px;
+    }
+
+    .hamburger span {
+      display:block; width:22px; height:1.5px;
+      background:var(--gold); transition:all var(--transition);
+    }
+
+    .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(4.5px,4.5px); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(4.5px,-4.5px); }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      min-height:100vh;
+      display:flex; align-items:center;
+      justify-content:center; text-align:center;
+      position:relative; overflow:hidden;
+      padding:140px 40px 100px;
+    }
+
+    .hero-bg {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 15% 60%, rgba(201,168,76,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(201,168,76,0.06) 0%, transparent 50%),
+        linear-gradient(150deg, #0D1B3E 0%, #162347 55%, #0A1530 100%);
+    }
+
+    .hero-grid {
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+      background-size:64px 64px;
+    }
+
+    .hero-content {
+      position:relative; z-index:2; max-width:840px;
+      visibility:hidden; /* GSAP reveals */
+    }
+
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:12px;
+      border:1px solid var(--border);
+      padding:8px 22px; margin-bottom:36px;
+      font-size:9.5px; letter-spacing:3.5px;
+      color:var(--gold); text-transform:uppercase;
+    }
+
+    .hero-badge::before,
+    .hero-badge::after {
+      content:''; width:22px; height:1px;
+      background:var(--gold); opacity:0.45;
+    }
+
+    .hero-logo {
+      width:148px; height:148px; object-fit:contain;
+      margin:0 auto 26px;
+      filter:drop-shadow(0 0 50px rgba(201,168,76,0.22));
+      border-radius:8px;
+    }
+
+    .hero-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(54px,9.5vw,108px);
+      font-weight:300; letter-spacing:20px;
+      color:var(--gold); line-height:1; margin-bottom:10px;
+    }
+
+    .hero-subtitle {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(12px,1.7vw,16px);
+      font-weight:300; letter-spacing:7px;
+      color:rgba(255,255,255,0.45); text-transform:uppercase;
+    }
+
+    .hero-line {
+      width:56px; height:1px; background:var(--gold);
+      margin:28px auto; opacity:0.45;
+    }
+
+    .hero-tagline {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(16px,1.9vw,20px);
+      font-weight:300; font-style:italic;
+      color:rgba(255,255,255,0.70);
+      line-height:1.8; max-width:560px; margin:0 auto 52px;
+    }
+
+    .hero-actions {
+      display:flex; gap:14px;
+      justify-content:center; flex-wrap:wrap;
+    }
+
+    .btn-primary {
+      background:var(--gold); color:var(--navy);
+      padding:15px 34px; font-size:10.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      font-weight:600; border-radius:2px;
+      transition:all var(--transition);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+
+    .btn-primary:hover {
+      background:var(--gold-light);
+      transform:translateY(-2px);
+      box-shadow:0 12px 32px rgba(201,168,76,0.35);
+    }
+
+    .btn-outline {
+      border:1px solid var(--gold); color:var(--gold);
+      padding:15px 34px; font-size:10.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      font-weight:500; border-radius:2px;
+      transition:all var(--transition);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+
+    .btn-outline:hover {
+      background:rgba(201,168,76,0.1);
+      transform:translateY(-2px);
+    }
+
+    .hero-stats {
+      display:flex; justify-content:center;
+      gap:56px; margin-top:68px;
+      padding-top:46px; border-top:1px solid var(--border);
+      flex-wrap:wrap;
+    }
+
+    .stat-number {
+      font-family:'Cormorant Garamond',serif;
+      font-size:46px; font-weight:300;
+      color:var(--gold); line-height:1; display:block;
+    }
+
+    .stat-label {
+      font-size:8.5px; letter-spacing:2.5px;
+      color:var(--text-dim); text-transform:uppercase; margin-top:6px;
+    }
+
+    .scroll-cue {
+      position:absolute; bottom:32px; left:50%;
+      transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center;
+      gap:6px;
+    }
+
+    .scroll-cue-line {
+      width:1px; height:46px;
+      background:linear-gradient(to bottom, var(--gold), transparent);
+      animation:scrollPulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; transform:scaleY(1); }
+      50% { opacity:0.4; transform:scaleY(0.7); }
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION COMMONS
+    ═══════════════════════════════════════ */
+    .section-pad { padding:100px 0; }
+    .section-pad-sm { padding:70px 0; }
+
+    .container {
+      max-width:1200px; margin:0 auto; padding:0 60px;
+    }
+
+    .section-head {
+      text-align:center; margin-bottom:64px;
+    }
+
+    .section-label {
+      display:block; font-size:9.5px; letter-spacing:4px;
+      color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+    }
+
+    .section-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(32px,4.5vw,52px);
+      font-weight:300; line-height:1.15;
+      margin-bottom:16px;
+    }
+
+    .section-title em { color:var(--gold); font-style:normal; }
+
+    .section-rule {
+      width:46px; height:1px; background:var(--gold);
+      margin:16px auto; opacity:0.45;
+    }
+
+    .section-desc {
+      font-size:13.5px; color:var(--text-muted);
+      max-width:510px; margin:0 auto;
+      line-height:1.9; font-weight:300;
+    }
+
+    /* ═══════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════ */
+    #services { background:var(--navy-light); }
+
+    .services-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:2px;
+    }
+
+    .service-card {
+      background:var(--navy);
+      padding:44px 34px;
+      border:1px solid var(--border);
+      position:relative; overflow:hidden;
+      display:flex; flex-direction:column;
+      transition:transform var(--transition), box-shadow var(--transition);
+    }
+
+    .service-card::before {
+      content:''; position:absolute;
+      top:0; left:0; width:2px; height:0;
+      background:var(--gold);
+      transition:height 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .service-card:hover::before { height:100%; }
+    .service-card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 24px 64px rgba(0,0,0,0.55);
+    }
+
+    .service-num {
+      font-family:'Cormorant Garamond',serif;
+      font-size:10.5px; color:var(--gold);
+      letter-spacing:3px; margin-bottom:16px; opacity:0.55;
+    }
+
+    .service-icon { font-size:24px; margin-bottom:16px; }
+
+    .service-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:22px; font-weight:400;
+      margin-bottom:12px; line-height:1.2;
+    }
+
+    .service-desc {
+      font-size:12.5px; color:var(--text-muted);
+      line-height:1.85; font-weight:300;
+      flex:1; margin-bottom:22px;
+    }
+
+    .service-price {
+      font-size:11.5px; color:var(--gold);
+      font-weight:500; letter-spacing:0.5px;
+      border-top:1px solid var(--border);
+      padding-top:14px;
+    }
+
+    /* Zones */
+    .zones-wrap {
+      margin-top:72px; text-align:center;
+    }
+
+    .zones-grid {
+      display:flex; flex-wrap:wrap;
+      justify-content:center; gap:9px; margin-top:26px;
+    }
+
+    .zone-pill {
+      border:1px solid var(--border);
+      padding:9px 22px; font-size:10.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      color:rgba(255,255,255,0.60);
+      transition:all var(--transition);
+    }
+
+    .zone-pill:hover { border-color:var(--gold); color:var(--gold); }
+
+    /* ═══════════════════════════════════════
+       TARIFS
+    ═══════════════════════════════════════ */
+    #tarifs { background:var(--navy); }
+
+    .tarifs-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .tarif-card {
+      border:1px solid var(--border);
+      padding:30px; background:var(--navy-light);
+      border-radius:2px;
+      transition:border-color var(--transition);
+    }
+
+    .tarif-card:hover { border-color:var(--gold); }
+
+    .tarif-head {
+      font-family:'Cormorant Garamond',serif;
+      font-size:19px; color:var(--gold);
+      display:flex; align-items:center; gap:9px;
+      margin-bottom:18px; padding-bottom:14px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .tarif-row {
+      display:flex; justify-content:space-between;
+      align-items:center; padding:8px 0;
+      border-bottom:1px solid rgba(201,168,76,0.07);
+      font-size:12.5px;
+    }
+
+    .tarif-row:last-of-type { border-bottom:none; }
+    .tarif-zone { color:rgba(255,255,255,0.60); font-weight:300; }
+    .tarif-val { color:var(--gold); font-weight:500; }
+
+    .tarif-note {
+      font-size:11px; color:var(--text-dim);
+      margin-top:13px; font-style:italic; line-height:1.6;
+    }
+
+    /* ═══════════════════════════════════════
+       À PROPOS
+    ═══════════════════════════════════════ */
+    #apropos { background:var(--navy-light); }
+
+    .apropos-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:start;
+    }
+
+    .apropos-text {
+      font-size:13px; color:var(--text-muted);
+      line-height:1.95; font-weight:300; margin-bottom:18px;
+    }
+
+    .valeur-item {
+      display:flex; gap:16px;
+      padding:20px 0; border-bottom:1px solid var(--border);
+      align-items:flex-start;
+    }
+
+    .valeur-item:last-child { border-bottom:none; }
+
+    .valeur-icon {
+      width:32px; height:32px; flex-shrink:0;
+      border:1px solid var(--gold); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--gold); font-size:12px;
+    }
+
+    .valeur-name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:17px; color:var(--gold); margin-bottom:4px;
+    }
+
+    .valeur-desc {
+      font-size:12px; color:var(--text-dim);
+      line-height:1.7; font-weight:300;
+    }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    #contact { background:var(--navy); }
+
+    .contact-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:56px;
+    }
+
+    .contact-block-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:24px; color:var(--gold); margin-bottom:26px;
+    }
+
+    .contact-item {
+      display:flex; align-items:flex-start;
+      gap:13px; margin-bottom:20px;
+    }
+
+    .contact-icon {
+      width:36px; height:36px; flex-shrink:0;
+      border:1px solid var(--border); border-radius:2px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px;
+    }
+
+    .contact-label {
+      font-size:9.5px; letter-spacing:1.5px;
+      color:var(--gold); text-transform:uppercase;
+      margin-bottom:3px; display:block;
+    }
+
+    .contact-val {
+      font-size:13px; color:rgba(255,255,255,0.68);
+      font-weight:300;
+    }
+
+    .contact-val a { color:var(--gold); transition:opacity var(--transition); }
+    .contact-val a:hover { opacity:0.75; }
+
+    .contact-actions { display:flex; flex-direction:column; gap:11px; margin-top:28px; }
+
+    .btn-whatsapp {
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      background:#25D366; color:white;
+      padding:15px 28px; font-size:10.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      font-weight:600; border-radius:2px;
+      transition:all var(--transition);
+    }
+
+    .btn-whatsapp:hover {
+      background:#1db954;
+      transform:translateY(-2px);
+      box-shadow:0 10px 28px rgba(37,211,102,0.38);
+    }
+
+    .btn-email {
+      display:flex; align-items:center; justify-content:center; gap:10px;
+      border:1px solid var(--gold); color:var(--gold);
+      padding:15px 28px; font-size:10.5px;
+      letter-spacing:2px; text-transform:uppercase;
+      font-weight:500; border-radius:2px;
+      transition:all var(--transition);
+    }
+
+    .btn-email:hover {
+      background:rgba(201,168,76,0.1);
+      transform:translateY(-2px);
+    }
+
+    /* Carte droite */
+    .contact-card {
+      border:1px solid var(--border);
+      padding:34px; background:var(--navy-light);
+      border-radius:2px; display:flex;
+      flex-direction:column; gap:22px;
+    }
+
+    .contact-card-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:21px; color:var(--gold);
+      padding-bottom:14px; border-bottom:1px solid var(--border);
+    }
+
+    .contact-card-text {
+      font-size:12.5px; color:var(--text-muted);
+      line-height:1.9; font-weight:300;
+    }
+
+    .contact-card-text strong { color:var(--gold); }
+
+    .live-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--border); padding:9px 16px;
+      font-size:10.5px; color:var(--gold); letter-spacing:1px;
+      border-radius:2px;
+    }
+
+    .live-dot {
+      width:7px; height:7px; background:#2ecc71;
+      border-radius:50%;
+      animation:livePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes livePulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(1.4); }
+    }
+
+    .contact-footer-note {
+      font-size:11px; color:var(--text-dim);
+      line-height:1.7; padding-top:18px;
+      border-top:1px solid var(--border);
+    }
+
+    /* ═══════════════════════════════════════
+       WHATSAPP FLOAT
+    ═══════════════════════════════════════ */
+    .wa-float {
+      position:fixed; bottom:26px; right:26px; z-index:998;
+      width:54px; height:54px; background:#25D366;
+      border-radius:50%; display:flex; align-items:center;
+      justify-content:center;
+      box-shadow:0 4px 22px rgba(37,211,102,0.42);
+      transition:all var(--transition);
+    }
+
+    .wa-float:hover {
+      transform:scale(1.1);
+      box-shadow:0 8px 32px rgba(37,211,102,0.58);
+    }
+
+    .wa-float svg { width:25px; height:25px; fill:white; }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background:var(--navy-dark);
+      padding:48px 60px;
+      border-top:1px solid var(--border);
+      text-align:center;
+    }
+
+    .footer-logo {
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px; color:var(--gold);
+      letter-spacing:10px; margin-bottom:8px;
+    }
+
+    .footer-sub {
+      font-size:9.5px; letter-spacing:3px;
+      color:var(--text-dim); text-transform:uppercase;
+      margin-bottom:26px;
+    }
+
+    .footer-nav {
+      display:flex; justify-content:center;
+      gap:26px; flex-wrap:wrap; margin-bottom:26px;
+    }
+
+    .footer-nav a {
+      font-size:9.5px; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-dim);
+      transition:color var(--transition);
+    }
+
+    .footer-nav a:hover { color:var(--gold); }
+
+    .footer-copy {
+      font-size:10.5px; color:rgba(255,255,255,0.15);
+    }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width:1024px) {
+      .services-grid { grid-template-columns:repeat(2,1fr); }
+      .tarifs-grid   { grid-template-columns:repeat(2,1fr); }
+    }
+
+    @media (max-width:900px) {
+      .nav { padding:13px 20px; }
+      .nav.scrolled { padding:10px 20px; }
+      .nav-links { display:none; }
+      .nav-links.open {
+        display:flex; flex-direction:column;
+        position:fixed; top:72px; left:0; right:0;
+        background:var(--navy); padding:24px 20px;
+        gap:18px; border-bottom:1px solid var(--border); z-index:999;
+      }
+      .hamburger { display:flex; }
+      .container { padding:0 22px; }
+      .section-pad { padding:70px 0; }
+      .section-head { margin-bottom:44px; }
+      .services-grid { grid-template-columns:1fr; }
+      .tarifs-grid   { grid-template-columns:1fr; }
+      .apropos-grid  { grid-template-columns:1fr; gap:44px; }
+      .contact-grid  { grid-template-columns:1fr; gap:36px; }
+      .hero-stats { gap:22px; }
+      footer { padding:36px 22px; }
+    }
+
+    /* ═══════════════════════════════════════
+       ESPACE CLIENT / PARRAINAGE
+       — Structure prête, section cachée —
+       Pour activer : retirer display:none
+       et brancher le lien Tally/Notion
+    ═══════════════════════════════════════ */
+    #parrainage { display:none; background:var(--navy-light); }
+    /* Décommenter pour activer :
+    #parrainage { display:block; background:var(--navy-light); }
+    */
+  </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════
+<!-- ═══════════════════════════════════════
      NAVIGATION
-═══════════════════════════════ -->
-<nav id="navbar">
-  <a href="#accueil" class="nav-logo">
-    <img src="logo-haven.jpg" alt="Haven Logo" class="nav-logo-img" onerror="this.style.display='none'">
-    <div>
-      <span class="nav-logo-text">HAVEN</span>
-      <span class="nav-logo-sub">FRENCH RIVIERA</span>
-    </div>
-  </a>
-
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#accueil">
-      <span data-lang-inline class="active" data-l="fr">Accueil</span>
-      <span data-lang-inline data-l="en">Home</span>
-      <span data-lang-inline data-l="ru">Главная</span>
-    </a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#tarifs">
-      <span data-lang-inline class="active" data-l="fr">Tarifs</span>
-      <span data-lang-inline data-l="en">Rates</span>
-      <span data-lang-inline data-l="ru">Тарифы</span>
-    </a></li>
-    <li><a href="#apropos">
-      <span data-lang-inline class="active" data-l="fr">À propos</span>
-      <span data-lang-inline data-l="en">About</span>
-      <span data-lang-inline data-l="ru">О нас</span>
-    </a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ru')">РУ</button>
-    </div>
-    <a href="https://wa.me/33679462165" class="nav-cta" target="_blank">WhatsApp</a>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- ═══════════════════════════════
-     HERO
-═══════════════════════════════ -->
-<section id="accueil">
-  <div class="hero-bg"></div>
-  <div class="hero-pattern"></div>
-  <div class="hero-content">
-
-    <div class="hero-badge">
-      <span data-lang class="active" data-l="fr">Conciergerie & Transport Privé — Côte d'Azur</span>
-      <span data-lang data-l="en">Concierge & Private Transport — French Riviera</span>
-      <span data-lang data-l="ru">Консьерж и Частный Транспорт — Лазурный берег</span>
-    </div>
-
-    <img src="logo-haven.jpg" alt="Haven" class="hero-logo-large" onerror="this.style.display='none'">
-
-    <h1 class="hero-title">HAVEN</h1>
-    <p class="hero-subtitle">French Riviera</p>
-    <div class="hero-divider"></div>
-
-    <p class="hero-tagline">
-      <span data-lang class="active" data-l="fr">Votre allié de confiance sur la Côte d'Azur.<br>Nous gérons le terrain, vous profitez de l'essentiel.</span>
-      <span data-lang data-l="en">Your trusted ally on the French Riviera.<br>We handle the ground, you enjoy what matters.</span>
-      <span data-lang data-l="ru">Ваш надёжный партнёр на Лазурном берегу.<br>Мы берём на себя всё, чтобы вы наслаждались главным.</span>
-    </p>
-
-    <div class="hero-actions">
-      <a href="#services" class="btn-primary">
-        <span data-lang-inline class="active" data-l="fr">Nos services</span>
-        <span data-lang-inline data-l="en">Our services</span>
-        <span data-lang-inline data-l="ru">Наши услуги</span>
-      </a>
-      <a href="#contact" class="btn-secondary">
-        <span data-lang-inline class="active" data-l="fr">Nous contacter</span>
-        <span data-lang-inline data-l="en">Contact us</span>
-        <span data-lang-inline data-l="ru">Связаться</span>
-      </a>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-number">7j/7</div>
-        <div class="stat-label">
-          <span data-lang-inline class="active" data-l="fr">Disponibilité</span>
-          <span data-lang-inline data-l="en">Availability</span>
-          <span data-lang-inline data-l="ru">Доступность</span>
-        </div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">
-          <span data-lang-inline class="active" data-l="fr">Clients directs</span>
-          <span data-lang-inline data-l="en">Direct clients</span>
-          <span data-lang-inline data-l="ru">Прямые клиенты</span>
-        </div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">6+</div>
-        <div class="stat-label">
-          <span data-lang-inline class="active" data-l="fr">Zones couvertes</span>
-          <span data-lang-inline data-l="en">Areas covered</span>
-          <span data-lang-inline data-l="ru">Зон обслуживания</span>
-        </div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">
-          <span data-lang-inline class="active" data-l="fr">Discrétion</span>
-          <span data-lang-inline data-l="en">Discretion</span>
-          <span data-lang-inline data-l="ru">Конфиденциальность</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-indicator"><div class="scroll-line"></div></div>
-</section>
-
-<!-- ═══════════════════════════════
-     SERVICES
-═══════════════════════════════ -->
-<section id="services">
-  <div class="section-header">
-    <span class="section-badge">
-      <span data-lang-inline class="active" data-l="fr">Ce que nous faisons</span>
-      <span data-lang-inline data-l="en">What we do</span>
-      <span data-lang-inline data-l="ru">Что мы делаем</span>
-    </span>
-    <h2 class="section-title">
-      <span data-lang class="active" data-l="fr">Nos <span>Services</span></span>
-      <span data-lang data-l="en">Our <span>Services</span></span>
-      <span data-lang data-l="ru">Наши <span>Услуги</span></span>
-    </h2>
-    <div class="gold-line"></div>
-    <p class="section-desc">
-      <span data-lang class="active" data-l="fr">Haven est une conciergerie de terrain. Nous intervenons là où vous ne pouvez pas être — avec le même soin que si vous y étiez.</span>
-      <span data-lang data-l="en">Haven is a field concierge. We act where you cannot be — with the same care as if you were there yourself.</span>
-      <span data-lang data-l="ru">Haven — консьерж на местах. Мы действуем там, где вас нет — с той же заботой, как если бы вы присутствовали сами.</span>
-    </p>
-  </div>
-
-  <div class="services-grid">
-
-    <div class="service-card">
-      <div class="service-number">01</div>
-      <span class="service-icon">🏠</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Conciergerie de Gardiennage</span>
-        <span data-lang data-l="en">Property Caretaking</span>
-        <span data-lang data-l="ru">Охрана Недвижимости</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">Surveillance de votre résidence secondaire en votre absence. Visites régulières avec rapport photo, gestion des accès artisans et techniciens, coordination entretien (jardinage, piscine, climatisation), intervention urgence 7j/7. Idéal pour non-résidents et expatriés.</span>
-        <span data-lang data-l="en">Monitoring your secondary residence in your absence. Regular visits with photo reports, contractor and technician access management, maintenance coordination (garden, pool, AC), emergency response 7/7. Ideal for non-residents and expats.</span>
-        <span data-lang data-l="ru">Наблюдение за вашей недвижимостью в ваше отсутствие. Регулярные визиты с фотоотчётами, управление доступом мастеров, координация обслуживания (сад, бассейн, кондиционер), экстренное реагирование 7 дней в неделю.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">À partir de 400€/mois — Sur mesure</span>
-        <span data-lang-inline data-l="en">From 400€/month — Bespoke</span>
-        <span data-lang-inline data-l="ru">От 400€/месяц — Индивидуально</span>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-number">02</div>
-      <span class="service-icon">🔑</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Assistance Locative</span>
-        <span data-lang data-l="en">Rental Assistance</span>
-        <span data-lang data-l="ru">Помощь при Аренде</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">Haven intervient sur place pour les propriétaires qui gèrent eux-mêmes leur location (Airbnb, Booking…). Accueil des locataires, remise de clés, état des lieux entrée/sortie, coordination et supervision du ménage, gestion du linge, assistance à la publication d'annonces, visites, sécurisation. Vous conservez la gestion locative et l'encaissement.</span>
-        <span data-lang data-l="en">Haven acts on-site for owners who manage their own rental (Airbnb, Booking…). Guest welcome, key handover, check-in/out inventory, cleaning supervision, linen management, listing assistance, property visits, security. You keep full control of rental management and payments.</span>
-        <span data-lang data-l="ru">Haven действует на месте для владельцев, самостоятельно управляющих своей арендой (Airbnb, Booking…). Встреча гостей, передача ключей, приёмка/сдача жилья, контроль уборки, управление бельём, помощь с объявлениями, осмотры, безопасность. Управление арендой и платежи остаются за вами.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">Forfait + à la carte selon secteur</span>
-        <span data-lang-inline data-l="en">Package + à la carte per area</span>
-        <span data-lang-inline data-l="ru">Пакет + по запросу в зависимости от района</span>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-number">03</div>
-      <span class="service-icon">⚡</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Runners & Missions</span>
-        <span data-lang data-l="en">Runners & Errands</span>
-        <span data-lang data-l="ru">Курьер и Поручения</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">Courses, achats, récupération de colis, démarches administratives, coordination d'artisans, gestion de RDV, accueil de prestataires, contrôle qualité sur place. Applicable dans tous les contextes : résidentiel, entreprise, événementiel.</span>
-        <span data-lang data-l="en">Shopping, parcel collection, administrative errands, contractor coordination, appointment management, supplier reception, on-site quality control. Applicable in all contexts: residential, corporate, events.</span>
-        <span data-lang data-l="ru">Покупки, получение посылок, административные поручения, координация мастеров, запись на приёмы, встреча подрядчиков, контроль качества. В любом контексте: жилое, корпоративное, мероприятия.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">50€/heure + frais de mission au réel</span>
-        <span data-lang-inline data-l="en">50€/hour + actual mission costs</span>
-        <span data-lang-inline data-l="ru">50€/час + фактические расходы на задание</span>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-number">04</div>
-      <span class="service-icon">🚗</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Transport VTC Privé</span>
-        <span data-lang data-l="en">Private Chauffeur</span>
-        <span data-lang data-l="ru">Частный Водитель</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">Chauffeur privé pour tous vos déplacements sur la Côte d'Azur. 100% clients directs — aucune plateforme intermédiaire. À la course ou mise à disposition. Transferts aéroport Nice, Monaco Héliport, gares TGV. Longues distances Région PACA.</span>
-        <span data-lang data-l="en">Private chauffeur for all your trips on the French Riviera. 100% direct clients — no platform. Per trip or full-day availability. Nice Airport, Monaco Heliport, TGV stations. Long distances across France.</span>
-        <span data-lang data-l="ru">Частный водитель для всех поездок на Лазурном берегу. 100% прямые клиенты — без посреднических платформ. Разовые поездки или полный день. Аэропорт Ниццы, вертолётная площадка Монако, вокзалы TGV. Дальние расстояния по всей Франции.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">2€/km + minimum selon secteur</span>
-        <span data-lang-inline data-l="en">2€/km + minimum per area</span>
-        <span data-lang-inline data-l="ru">2€/км + минимум по зоне</span>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-number">05</div>
-      <span class="service-icon">🏢</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Conciergerie d'Entreprise</span>
-        <span data-lang data-l="en">Corporate Concierge</span>
-        <span data-lang data-l="ru">Корпоративный Консьерж</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">Forfaits mensuels pour PME de la Côte d'Azur. Transport de collaborateurs et clients, disponibilité prioritaire 6h-22h, facturation mensuelle unique, rapport mensuel des courses. Cibles : Sophia-Antipolis (tech/pharma), hôtels 4-5*, cliniques, cabinets avocats/notaires, agences immobilières de luxe.</span>
-        <span data-lang data-l="en">Monthly packages for Côte d'Azur businesses. Staff and client transport, priority availability 6am-10pm, single monthly invoice, monthly trip report. Targets: Sophia-Antipolis (tech/pharma), 4-5* hotels, clinics, law/notary firms, luxury real estate agencies.</span>
-        <span data-lang data-l="ru">Ежемесячные пакеты для компаний Лазурного берега. Транспорт сотрудников и клиентов, приоритетная доступность 6:00-22:00, единый ежемесячный счёт, отчёт о поездках. Цели: Sophia-Antipolis, отели 4-5*, клиники, юридические конторы, агентства элитной недвижимости.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">Forfait mensuel sur devis</span>
-        <span data-lang-inline data-l="en">Monthly package on quote</span>
-        <span data-lang-inline data-l="ru">Ежемесячный пакет по запросу</span>
-      </div>
-    </div>
-
-    <div class="service-card">
-      <div class="service-number">06</div>
-      <span class="service-icon">✨</span>
-      <h3 class="service-title">
-        <span data-lang class="active" data-l="fr">Événementiel & Congrès</span>
-        <span data-lang data-l="en">Events & Congresses</span>
-        <span data-lang data-l="ru">Мероприятия и Конгрессы</span>
-      </h3>
-      <p class="service-desc">
-        <span data-lang class="active" data-l="fr">MIPIM (mars), Festival de Cannes (mai), MAPIC/MIPCOM (oct-nov), Roland-Garros relais. Transport de délégations, navettes inter-hôtels, mise à disposition journée complète. Un client événementiel = un potentiel client annuel pour tous ses déplacements Côte d'Azur.</span>
-        <span data-lang data-l="en">MIPIM (March), Cannes Film Festival (May), MAPIC/MIPCOM (Oct-Nov), Roland-Garros relay. Delegation transport, inter-hotel shuttles, full-day availability. One event client = a potential annual client for all Riviera trips.</span>
-        <span data-lang data-l="ru">MIPIM (март), Каннский кинофестиваль (май), MAPIC/MIPCOM (окт-нояб), Ролан Гаррос. Транспорт делегаций, маршрутки между отелями, полный день. Клиент мероприятия = потенциальный постоянный клиент.</span>
-      </p>
-      <div class="service-price">
-        <span data-lang-inline class="active" data-l="fr">Sur mesure — Tarif journée</span>
-        <span data-lang-inline data-l="en">Bespoke — Day rate</span>
-        <span data-lang-inline data-l="ru">Индивидуально — Дневной тариф</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Zones -->
-  <div class="zones-section">
-    <span class="section-badge">
-      <span data-lang-inline class="active" data-l="fr">Zones d'intervention</span>
-      <span data-lang-inline data-l="en">Coverage areas</span>
-      <span data-lang-inline data-l="ru">Зоны обслуживания</span>
-    </span>
-    <div class="zones-grid">
-      <div class="zone-tag">Cannes</div>
-      <div class="zone-tag">Nice</div>
-      <div class="zone-tag">Monaco</div>
-      <div class="zone-tag">Antibes</div>
-      <div class="zone-tag">Mougins</div>
-      <div class="zone-tag">Juan-les-Pins</div>
-      <div class="zone-tag">Sophia-Antipolis</div>
-      <div class="zone-tag">
-        <span data-lang-inline class="active" data-l="fr">Région PACA</span>
-        <span data-lang-inline data-l="en">All France</span>
-        <span data-lang-inline data-l="ru">Вся Франция</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════
-     TARIFS
-═══════════════════════════════ -->
-<section id="tarifs">
-  <div class="section-header">
-    <span class="section-badge">
-      <span data-lang-inline class="active" data-l="fr">Transparence totale</span>
-      <span data-lang-inline data-l="en">Full transparency</span>
-      <span data-lang-inline data-l="ru">Полная прозрачность</span>
-    </span>
-    <h2 class="section-title">
-      <span data-lang class="active" data-l="fr">Nos <span>Tarifs</span></span>
-      <span data-lang data-l="en">Our <span>Rates</span></span>
-      <span data-lang data-l="ru">Наши <span>Тарифы</span></span>
-    </h2>
-    <div class="gold-line"></div>
-    <p class="section-desc">
-      <span data-lang class="active" data-l="fr">Aucune surprise. Tarifs fixes communiqués à l'avance. Tous les forfaits sont personnalisables selon vos besoins.</span>
-      <span data-lang data-l="en">No surprises. Fixed rates communicated in advance. All packages are fully customisable.</span>
-      <span data-lang data-l="ru">Никаких сюрпризов. Фиксированные тарифы заранее. Все пакеты полностью настраиваются.</span>
-    </p>
-  </div>
-
-  <div class="tarifs-grid">
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">🚗
-        <span data-lang-inline class="active" data-l="fr">Transport VTC — 2€/km</span>
-        <span data-lang-inline data-l="en">Private Transport — 2€/km</span>
-        <span data-lang-inline data-l="ru">Транспорт — 2€/км</span>
-      </div>
-      <div class="tarif-row"><span class="tarif-sector">Mougins</span><span class="tarif-price">min. 10€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Cannes</span><span class="tarif-price">min. 25€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Antibes</span><span class="tarif-price">min. 35€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Cagnes-sur-Mer</span><span class="tarif-price">min. 50€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Nice / Aéroport</span><span class="tarif-price">min. 60€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Monaco / Héliport</span><span class="tarif-price">min. 100€</span></div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Suivi vols temps réel. Attente incluse sur transferts aéroport. Tarifs fixes, aucune surprise.</span>
-        <span data-lang data-l="en">Real-time flight tracking. Waiting included on airport transfers. Fixed rates, no surprises.</span>
-        <span data-lang data-l="ru">Отслеживание рейсов в реальном времени. Ожидание включено при трансферах. Фиксированные тарифы.</span>
-      </p>
-    </div>
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">🔑
-        <span data-lang-inline class="active" data-l="fr">Accueil / Sortie + Ménage</span>
-        <span data-lang-inline data-l="en">Check-in / Check-out + Cleaning</span>
-        <span data-lang-inline data-l="ru">Заезд / Выезд + Уборка</span>
-      </div>
-      <div class="tarif-row"><span class="tarif-sector">Mougins</span><span class="tarif-price">min. 250€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Cannes</span><span class="tarif-price">min. 300€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Nice</span><span class="tarif-price">min. 350€</span></div>
-      <div class="tarif-row"><span class="tarif-sector">Monaco</span><span class="tarif-price">min. 450€</span></div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Frais de ménage refacturés au réel en supplément.</span>
-        <span data-lang data-l="en">Cleaning costs billed additionally at actual cost.</span>
-        <span data-lang data-l="ru">Расходы на уборку дополнительно по фактической стоимости.</span>
-      </p>
-    </div>
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">⚡
-        <span data-lang-inline class="active" data-l="fr">Runners & Gestion Personnelle</span>
-        <span data-lang-inline data-l="en">Runners & Personal Management</span>
-        <span data-lang-inline data-l="ru">Курьер и Личное Управление</span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Taux horaire</span>
-          <span data-lang-inline data-l="en">Hourly rate</span>
-          <span data-lang-inline data-l="ru">Почасовая ставка</span>
-        </span>
-        <span class="tarif-price">50€/h</span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Frais de mission</span>
-          <span data-lang-inline data-l="en">Mission costs</span>
-          <span data-lang-inline data-l="ru">Расходы на задание</span>
-        </span>
-        <span class="tarif-price">
-          <span data-lang-inline class="active" data-l="fr">Au réel</span>
-          <span data-lang-inline data-l="en">At cost</span>
-          <span data-lang-inline data-l="ru">По факту</span>
-        </span>
-      </div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Déplacements courts inclus dans le taux horaire. Supplément kilométrique sur devis si longue distance.</span>
-        <span data-lang data-l="en">Short trips included in hourly rate. Mileage supplement on quote for long distances.</span>
-        <span data-lang data-l="ru">Короткие поездки включены. Доплата за километраж по запросу на дальние расстояния.</span>
-      </p>
-    </div>
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">🏠
-        <span data-lang-inline class="active" data-l="fr">Gardiennage — Forfaits</span>
-        <span data-lang-inline data-l="en">Caretaking — Packages</span>
-        <span data-lang-inline data-l="ru">Охрана — Пакеты</span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Forfait Essentiel</span>
-          <span data-lang-inline data-l="en">Essential Package</span>
-          <span data-lang-inline data-l="ru">Базовый пакет</span>
-        </span>
-        <span class="tarif-price">
-          <span data-lang-inline class="active" data-l="fr">À partir de 400€/mois</span>
-          <span data-lang-inline data-l="en">From 400€/month</span>
-          <span data-lang-inline data-l="ru">От 400€/месяц</span>
-        </span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Forfaits sur mesure</span>
-          <span data-lang-inline data-l="en">Bespoke packages</span>
-          <span data-lang-inline data-l="ru">Индивидуальные пакеты</span>
-        </span>
-        <span class="tarif-price">
-          <span data-lang-inline class="active" data-l="fr">Sur devis</span>
-          <span data-lang-inline data-l="en">On quote</span>
-          <span data-lang-inline data-l="ru">По запросу</span>
-        </span>
-      </div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Forfait Essentiel : 1 visite/semaine + gestion courrier + 1 urgence offerte/mois. Personnalisable selon la taille du bien, le secteur et la fréquence souhaitée.</span>
-        <span data-lang data-l="en">Essential: 1 visit/week + mail management + 1 free emergency/month. Customisable by property size, area and frequency.</span>
-        <span data-lang data-l="ru">Базовый: 1 визит/неделю + управление почтой + 1 бесплатный вызов/месяц. Настраивается под объект, район и частоту.</span>
-      </p>
-    </div>
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">🧺
-        <span data-lang-inline class="active" data-l="fr">Gestion du Linge</span>
-        <span data-lang-inline data-l="en">Linen Management</span>
-        <span data-lang-inline data-l="ru">Управление Бельём</span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">Pressing</span>
-        <span class="tarif-price">
-          <span data-lang-inline class="active" data-l="fr">Prix réel</span>
-          <span data-lang-inline data-l="en">At cost</span>
-          <span data-lang-inline data-l="ru">По факту</span>
-        </span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Équipe ménage</span>
-          <span data-lang-inline data-l="en">Cleaning team</span>
-          <span data-lang-inline data-l="ru">Команда уборщиков</span>
-        </span>
-        <span class="tarif-price">2€/kg</span>
-      </div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Service transversal applicable dans tous contextes : résidentiel, Airbnb, entreprise, événementiel.</span>
-        <span data-lang data-l="en">Cross-context service: residential, Airbnb, corporate, events.</span>
-        <span data-lang data-l="ru">Для всех контекстов: жилое, Airbnb, корпоративное, мероприятия.</span>
-      </p>
-    </div>
-
-    <div class="tarif-block">
-      <div class="tarif-block-title">🏢
-        <span data-lang-inline class="active" data-l="fr">Conciergerie d'Entreprise</span>
-        <span data-lang-inline data-l="en">Corporate Concierge</span>
-        <span data-lang-inline data-l="ru">Корпоративный Консьерж</span>
-      </div>
-      <div class="tarif-row">
-        <span class="tarif-sector">
-          <span data-lang-inline class="active" data-l="fr">Forfait mensuel</span>
-          <span data-lang-inline data-l="en">Monthly package</span>
-          <span data-lang-inline data-l="ru">Ежемесячный пакет</span>
-        </span>
-        <span class="tarif-price">
-          <span data-lang-inline class="active" data-l="fr">Sur devis</span>
-          <span data-lang-inline data-l="en">On quote</span>
-          <span data-lang-inline data-l="ru">По запросу</span>
-        </span>
-      </div>
-      <p class="tarif-note">
-        <span data-lang class="active" data-l="fr">Disponibilité 6h-22h garantie. Facturation mensuelle unique. Rapport mensuel. Tarif préférentiel vs à la course.</span>
-        <span data-lang data-l="en">Guaranteed availability 6am-10pm. Single monthly invoice. Monthly report. Preferential rate vs per trip.</span>
-        <span data-lang data-l="ru">Доступность 6:00-22:00. Единый счёт. Ежемесячный отчёт. Льготный тариф.</span>
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════
-     À PROPOS
-═══════════════════════════════ -->
-<section id="apropos">
-  <div class="section-header">
-    <span class="section-badge">
-      <span data-lang-inline class="active" data-l="fr">Notre histoire</span>
-      <span data-lang-inline data-l="en">Our story</span>
-      <span data-lang-inline data-l="ru">Наша история</span>
-    </span>
-    <h2 class="section-title">
-      <span data-lang class="active" data-l="fr">Né d'un désir sincère <span>de servir</span></span>
-      <span data-lang data-l="en">Born from a sincere desire <span>to serve</span></span>
-      <span data-lang data-l="ru">Рождённый из желания <span>служить</span></span>
-    </h2>
-    <div class="gold-line"></div>
-  </div>
-
-  <div class="apropos-inner">
-    <div>
-      <p class="apropos-text">
-        <span data-lang class="active" data-l="fr">Haven n'est pas né d'une opportunité business. Il est né d'un désir sincère de servir. Tout a commencé sur la route, en tant que chauffeur VTC privé. Jour après jour, Théo a rencontré des entrepreneurs, des familles et des voyageurs qui partageaient tous la même difficulté : le manque de temps, de soutien fiable, et le besoin de quelqu'un en qui ils pourraient vraiment avoir confiance.</span>
-        <span data-lang data-l="en">Haven was not born from a business opportunity. It was born from a sincere desire to serve. It all started on the road, as a private chauffeur. Day after day, Théo met entrepreneurs, families and travellers who all shared the same difficulty: lack of time, reliable support, and the need for someone they could truly trust.</span>
-        <span data-lang data-l="ru">Haven родился не из бизнес-возможности. Он родился из искреннего желания служить. Всё началось на дороге в роли частного водителя. День за днём Тео встречал предпринимателей, семьи и путешественников, которые разделяли одну трудность: нехватка времени, надёжной поддержки и потребность в ком-то, кому можно по-настоящему доверять.</span>
-      </p>
-      <p class="apropos-text">
-        <span data-lang class="active" data-l="fr">Construit en famille avec sa mère, Haven a grandi dans le monde réel de l'entrepreneuriat — sans raccourcis. Chaque client satisfait, chaque problème résolu, a permis de construire quelque chose de plus solide, basé sur la confiance, la constance et l'attention portée aux autres.</span>
-        <span data-lang data-l="en">Built as a family venture with his mother, Haven grew in the real world of entrepreneurship — without shortcuts. Every satisfied client, every problem solved, helped build something more solid, based on trust, consistency and genuine care for others.</span>
-        <span data-lang data-l="ru">Созданный вместе с матерью как семейное предприятие, Haven вырос в реальном мире предпринимательства — без shortcuts. Каждый довольный клиент, каждая решённая проблема помогали выстраивать нечто более прочное, основанное на доверии, постоянстве и заботе о других.</span>
-      </p>
-      <a href="#contact" class="btn-primary" style="margin-top:16px;">
-        <span data-lang-inline class="active" data-l="fr">Travailler avec nous</span>
-        <span data-lang-inline data-l="en">Work with us</span>
-        <span data-lang-inline data-l="ru">Работать с нами</span>
-      </a>
-    </div>
-
-    <ul class="valeurs-list">
-      <li class="valeur-item">
-        <div class="valeur-icon">◈</div>
-        <div>
-          <div class="valeur-title">
-            <span data-lang-inline class="active" data-l="fr">Relation directe</span>
-            <span data-lang-inline data-l="en">Direct relationship</span>
-            <span data-lang-inline data-l="ru">Прямые отношения</span>
-          </div>
-          <div class="valeur-desc">
-            <span data-lang class="active" data-l="fr">Relation directe sur WhatsApp.</span>
-            <span data-lang data-l="en">Théo = single point of contact. No subcontractor, no intermediary platform for Haven clients.</span>
-            <span data-lang data-l="ru">Тео = единственный контакт. Без субподрядчиков, без посреднических платформ для клиентов Haven.</span>
-          </div>
-        </div>
-      </li>
-      <li class="valeur-item">
-        <div class="valeur-icon">◈</div>
-        <div>
-          <div class="valeur-title">
-            <span data-lang-inline class="active" data-l="fr">Ponctualité absolue</span>
-            <span data-lang-inline data-l="en">Absolute punctuality</span>
-            <span data-lang-inline data-l="ru">Абсолютная пунктуальность</span>
-          </div>
-          <div class="valeur-desc">
-            <span data-lang class="active" data-l="fr">Votre temps est précieux. Haven est là avant vous. Toujours.</span>
-            <span data-lang data-l="en">Your time is precious. Haven is there before you. Always.</span>
-            <span data-lang data-l="ru">Ваше время драгоценно. Haven уже там до вашего прихода. Всегда.</span>
-          </div>
-        </div>
-      </li>
-      <li class="valeur-item">
-        <div class="valeur-icon">◈</div>
-        <div>
-          <div class="valeur-title">
-            <span data-lang-inline class="active" data-l="fr">Discrétion totale</span>
-            <span data-lang-inline data-l="en">Total discretion</span>
-            <span data-lang-inline data-l="ru">Полная конфиденциальность</span>
-          </div>
-          <div class="valeur-desc">
-            <span data-lang class="active" data-l="fr">Confidentialité absolue sur vos déplacements, vos biens et vos activités.</span>
-            <span data-lang data-l="en">Absolute confidentiality on your movements, assets and activities.</span>
-            <span data-lang data-l="ru">Абсолютная конфиденциальность ваших передвижений, имущества и деятельности.</span>
-          </div>
-        </div>
-      </li>
-      <li class="valeur-item">
-        <div class="valeur-icon">◈</div>
-        <div>
-          <div class="valeur-title">
-            <span data-lang-inline class="active" data-l="fr">Constance</span>
-            <span data-lang-inline data-l="en">Consistency</span>
-            <span data-lang-inline data-l="ru">Постоянство</span>
-          </div>
-          <div class="valeur-desc">
-            <span data-lang class="active" data-l="fr">Même qualité de service, qu'il s'agisse du 1er ou du 100e trajet.</span>
-            <span data-lang data-l="en">Same quality of service, whether it is the 1st or the 100th trip.</span>
-            <span data-lang data-l="ru">Одинаковое качество обслуживания, будь то 1-я или 100-я поездка.</span>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════
-     CONTACT
-═══════════════════════════════ -->
-<section id="contact">
-  <div class="section-header">
-    <span class="section-badge">
-      <span data-lang-inline class="active" data-l="fr">Parlons-en</span>
-      <span data-lang-inline data-l="en">Let's talk</span>
-      <span data-lang-inline data-l="ru">Давайте поговорим</span>
-    </span>
-    <h2 class="section-title">
-      <span data-lang class="active" data-l="fr">Nous <span>Contacter</span></span>
-      <span data-lang data-l="en"><span>Contact</span> Us</span>
-      <span data-lang data-l="ru"><span>Связаться</span> с нами</span>
-    </h2>
-    <div class="gold-line"></div>
-    <p class="section-desc">
-      <span data-lang class="active" data-l="fr">Réponse garantie sous 2h. WhatsApp privilégié pour les demandes urgentes.</span>
-      <span data-lang data-l="en">Guaranteed response within 2 hours. WhatsApp preferred for urgent requests.</span>
-      <span data-lang data-l="ru">Гарантированный ответ в течение 2 часов. WhatsApp предпочтителен для срочных запросов.</span>
-    </p>
-  </div>
-
-  <div class="contact-inner">
-    <div class="contact-grid">
-
-      <!-- Coordonnées -->
+═══════════════════════════════════════ -->
+<header>
+  <nav class="nav" id="nav" role="navigation" aria-label="Navigation principale">
+    <a href="#accueil" class="nav-logo" aria-label="Haven — Accueil">
+      <img src="logo-haven.jpg" alt="Haven Logo" class="nav-logo-img"
+           loading="eager" onerror="this.style.display='none'">
       <div>
-        <div class="contact-block-title">
-          <span data-lang-inline class="active" data-l="fr">Coordonnées</span>
-          <span data-lang-inline data-l="en">Contact details</span>
-          <span data-lang-inline data-l="ru">Контактные данные</span>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-item-icon">📱</div>
-          <div class="contact-item-text">
-            <strong>WhatsApp / Tél</strong>
-            <a href="https://wa.me/33679462165">+33 6 79 46 21 65</a>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-item-icon">✉️</div>
-          <div class="contact-item-text">
-            <strong>Email</strong>
-            <a href="mailto:contact@havenconciergerie.com">contact@havenconciergerie.com</a>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-item-icon">🌐</div>
-          <div class="contact-item-text">
-            <strong>Site</strong>
-            <a href="https://havenconciergerie.com">havenconciergerie.com</a>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-item-icon">📍</div>
-          <div class="contact-item-text">
-            <strong>
-              <span data-lang-inline class="active" data-l="fr">Zone principale</span>
-              <span data-lang-inline data-l="en">Main area</span>
-              <span data-lang-inline data-l="ru">Основная зона</span>
-            </strong>
-            Cannes, Côte d'Azur
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-item-icon">🕐</div>
-          <div class="contact-item-text">
-            <strong>
-              <span data-lang-inline class="active" data-l="fr">Disponibilité</span>
-              <span data-lang-inline data-l="en">Availability</span>
-              <span data-lang-inline data-l="ru">Доступность</span>
-            </strong>
-            7j/7
-          </div>
-        </div>
-
-        <div class="contact-actions">
-          <a href="https://wa.me/33679462165" target="_blank" class="btn-whatsapp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span data-lang-inline class="active" data-l="fr">Écrire sur WhatsApp</span>
-            <span data-lang-inline data-l="en">Message on WhatsApp</span>
-            <span data-lang-inline data-l="ru">Написать в WhatsApp</span>
-          </a>
-          <a href="mailto:contact@havenconciergerie.com" class="btn-email">
-            <span>✉</span>
-            <span data-lang-inline class="active" data-l="fr">Envoyer un email</span>
-            <span data-lang-inline data-l="en">Send an email</span>
-            <span data-lang-inline data-l="ru">Отправить email</span>
-          </a>
-        </div>
+        <span class="nav-logo-name">HAVEN</span>
+        <span class="nav-logo-sub">FRENCH RIVIERA</span>
       </div>
+    </a>
 
-      <!-- Carte info droite -->
-      <div class="contact-card">
-        <div class="contact-card-title">
-          <span data-lang-inline class="active" data-l="fr">Comment ça marche ?</span>
-          <span data-lang-inline data-l="en">How does it work?</span>
-          <span data-lang-inline data-l="ru">Как это работает?</span>
-        </div>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#accueil">
+        <span data-lang-i class="active" data-l="fr">Accueil</span>
+        <span data-lang-i data-l="en">Home</span>
+        <span data-lang-i data-l="ru">Главная</span>
+      </a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#tarifs">
+        <span data-lang-i class="active" data-l="fr">Tarifs</span>
+        <span data-lang-i data-l="en">Rates</span>
+        <span data-lang-i data-l="ru">Тарифы</span>
+      </a></li>
+      <li><a href="#apropos">
+        <span data-lang-i class="active" data-l="fr">À propos</span>
+        <span data-lang-i data-l="en">About</span>
+        <span data-lang-i data-l="ru">О нас</span>
+      </a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
 
-        <div class="response-badge">
-          <div class="response-dot"></div>
-          <span data-lang-inline class="active" data-l="fr">Réponse garantie sous 2h</span>
-          <span data-lang-inline data-l="en">Guaranteed reply within 2h</span>
-          <span data-lang-inline data-l="ru">Ответ гарантирован в течение 2 часов</span>
-        </div>
-
-        <p class="contact-card-text">
-          <span data-lang class="active" data-l="fr">
-            <strong style="color:var(--gold)">1.</strong> Contactez-nous via WhatsApp ou email en décrivant votre besoin.<br><br>
-            <strong style="color:var(--gold)">2.</strong> On vous répond personnellement sous 2h pour discuter de votre demande.<br><br>
-            <strong style="color:var(--gold)">3.</strong> Nous définissons ensemble la prestation adaptée et le tarif correspondant.<br><br>
-            <strong style="color:var(--gold)">4.</strong> Haven intervient sur le terrain avec la même qualité à chaque fois.
-          </span>
-          <span data-lang data-l="en">
-            <strong style="color:var(--gold)">1.</strong> Contact us via WhatsApp or email describing your need.<br><br>
-            <strong style="color:var(--gold)">2.</strong> Théo replies personally within 2h to discuss your request.<br><br>
-            <strong style="color:var(--gold)">3.</strong> We define together the right service and the corresponding rate.<br><br>
-            <strong style="color:var(--gold)">4.</strong> Haven acts on the ground with the same quality every time.
-          </span>
-          <span data-lang data-l="ru">
-            <strong style="color:var(--gold)">1.</strong> Свяжитесь с нами через WhatsApp или email, описав свою потребность.<br><br>
-            <strong style="color:var(--gold)">2.</strong> Тео лично ответит в течение 2 часов, чтобы обсудить ваш запрос.<br><br>
-            <strong style="color:var(--gold)">3.</strong> Мы совместно определяем подходящую услугу и соответствующий тариф.<br><br>
-            <strong style="color:var(--gold)">4.</strong> Haven действует на месте с неизменным качеством каждый раз.
-          </span>
-        </p>
-
-        <div style="border-top:1px solid var(--border); padding-top:20px; font-size:12px; color:rgba(255,255,255,0.38); line-height:1.7;">
-          <span data-lang class="active" data-l="fr">Haven SAS · SIRET 914413554 RCS GRASSE<br>Côte d'Azur, France</span>
-          <span data-lang data-l="en">Haven SAS · SIRET 914413554 RCS GRASSE<br>French Riviera, France</span>
-          <span data-lang data-l="ru">Haven SAS · SIRET 914413554 RCS GRASSE<br>Лазурный берег, Франция</span>
-        </div>
+    <div class="nav-right">
+      <div class="lang-switcher" role="group" aria-label="Langue">
+        <button class="lang-btn active" onclick="setLang('fr')" aria-label="Français">FR</button>
+        <button class="lang-btn" onclick="setLang('en')" aria-label="English">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')" aria-label="Русский">РУ</button>
       </div>
-
+      <a href="https://wa.me/33679462165" class="nav-cta" target="_blank"
+         rel="noopener" aria-label="Contacter Haven sur WhatsApp">WhatsApp</a>
+      <button class="hamburger" id="hamburger"
+              onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </div>
-</section>
+  </nav>
+</header>
 
-<!-- ═══════════════════════════════
+<!-- ═══════════════════════════════════════
+     MAIN
+═══════════════════════════════════════ -->
+<main>
+
+  <!-- ── HERO ── -->
+  <section id="accueil" class="hero" aria-label="Accueil Haven">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge">
+        <span data-lang class="active" data-l="fr">Conciergerie & Transport Privé — Côte d'Azur</span>
+        <span data-lang data-l="en">Concierge & Private Transport — French Riviera</span>
+        <span data-lang data-l="ru">Консьерж и Частный Транспорт — Лазурный берег</span>
+      </div>
+
+      <img src="logo-haven.jpg" alt="Haven — Conciergerie French Riviera"
+           class="hero-logo" loading="eager"
+           onerror="this.style.display='none'">
+
+      <h1 class="hero-title">HAVEN</h1>
+      <p class="hero-subtitle">French Riviera</p>
+      <div class="hero-line" aria-hidden="true"></div>
+
+      <p class="hero-tagline">
+        <span data-lang class="active" data-l="fr">Votre allié de confiance sur la Côte d'Azur.<br>Nous gérons le terrain, vous profitez de l'essentiel.</span>
+        <span data-lang data-l="en">Your trusted ally on the French Riviera.<br>We handle the ground, you enjoy what matters.</span>
+        <span data-lang data-l="ru">Ваш надёжный партнёр на Лазурном берегу.<br>Мы берём на себя всё, чтобы вы наслаждались главным.</span>
+      </p>
+
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">
+          <span data-lang-i class="active" data-l="fr">Nos services</span>
+          <span data-lang-i data-l="en">Our services</span>
+          <span data-lang-i data-l="ru">Наши услуги</span>
+        </a>
+        <a href="#contact" class="btn-outline">
+          <span data-lang-i class="active" data-l="fr">Nous contacter</span>
+          <span data-lang-i data-l="en">Contact us</span>
+          <span data-lang-i data-l="ru">Связаться</span>
+        </a>
+      </div>
+
+      <div class="hero-stats" role="list">
+        <div class="stat" role="listitem">
+          <span class="stat-number">7j/7</span>
+          <div class="stat-label">
+            <span data-lang-i class="active" data-l="fr">Disponibilité</span>
+            <span data-lang-i data-l="en">Availability</span>
+            <span data-lang-i data-l="ru">Доступность</span>
+          </div>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-number">100%</span>
+          <div class="stat-label">
+            <span data-lang-i class="active" data-l="fr">Clients directs</span>
+            <span data-lang-i data-l="en">Direct clients</span>
+            <span data-lang-i data-l="ru">Прямые клиенты</span>
+          </div>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-number">6+</span>
+          <div class="stat-label">
+            <span data-lang-i class="active" data-l="fr">Zones couvertes</span>
+            <span data-lang-i data-l="en">Areas covered</span>
+            <span data-lang-i data-l="ru">Зон обслуживания</span>
+          </div>
+        </div>
+        <div class="stat" role="listitem">
+          <span class="stat-number">∞</span>
+          <div class="stat-label">
+            <span data-lang-i class="active" data-l="fr">Discrétion</span>
+            <span data-lang-i data-l="en">Discretion</span>
+            <span data-lang-i data-l="ru">Конфиденциальность</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section id="services" class="section-pad" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">
+          <span data-lang-i class="active" data-l="fr">Ce que nous faisons</span>
+          <span data-lang-i data-l="en">What we do</span>
+          <span data-lang-i data-l="ru">Что мы делаем</span>
+        </span>
+        <h2 class="section-title" id="services-title">
+          <span data-lang class="active" data-l="fr">Nos <em>Services</em></span>
+          <span data-lang data-l="en">Our <em>Services</em></span>
+          <span data-lang data-l="ru">Наши <em>Услуги</em></span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          <span data-lang class="active" data-l="fr">Haven est une conciergerie de terrain. Nous intervenons là où vous ne pouvez pas être — avec le même soin que si vous y étiez.</span>
+          <span data-lang data-l="en">Haven is a field concierge. We act where you cannot be — with the same care as if you were there yourself.</span>
+          <span data-lang data-l="ru">Haven — консьерж на местах. Мы действуем там, где вас нет — с той же заботой, как если бы вы присутствовали сами.</span>
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-icon" aria-hidden="true">🏠</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Conciergerie de Gardiennage</span>
+            <span data-lang data-l="en">Property Caretaking</span>
+            <span data-lang data-l="ru">Охрана Недвижимости</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">Surveillance de votre résidence secondaire en votre absence. Visites régulières avec rapport photo, gestion des accès artisans et techniciens, coordination entretien (jardinage, piscine, climatisation), intervention urgence 7j/7. Idéal pour non-résidents et expatriés.</span>
+            <span data-lang data-l="en">Monitoring your secondary residence in your absence. Regular visits with photo reports, contractor access management, maintenance coordination (garden, pool, AC), emergency response 7/7. Ideal for non-residents and expats.</span>
+            <span data-lang data-l="ru">Наблюдение за вашей недвижимостью. Регулярные визиты с фотоотчётами, управление доступом мастеров, координация обслуживания (сад, бассейн, кондиционер), экстренное реагирование 7 дней в неделю.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">À partir de 400€/mois — Sur mesure</span>
+            <span data-lang-i data-l="en">From 400€/month — Bespoke</span>
+            <span data-lang-i data-l="ru">От 400€/месяц — Индивидуально</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-icon" aria-hidden="true">🔑</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Assistance Locative</span>
+            <span data-lang data-l="en">Rental Assistance</span>
+            <span data-lang data-l="ru">Помощь при Аренде</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">Haven intervient sur place pour les propriétaires qui gèrent eux-mêmes leur location (Airbnb, Booking…). Accueil locataires, remise de clés, état des lieux entrée/sortie, supervision ménage, gestion linge, visites, sécurisation. Vous conservez la gestion locative et l'encaissement.</span>
+            <span data-lang data-l="en">Haven acts on-site for owners who manage their own rental (Airbnb, Booking…). Guest welcome, key handover, check-in/out inventory, cleaning supervision, linen management, property visits, security. You keep full control of rental management and payments.</span>
+            <span data-lang data-l="ru">Haven действует на месте для владельцев, управляющих своей арендой (Airbnb, Booking…). Встреча гостей, ключи, приёмка/сдача жилья, уборка, бельё, осмотры. Управление арендой и платежи остаются за вами.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">Forfait + à la carte selon secteur</span>
+            <span data-lang-i data-l="en">Package + à la carte per area</span>
+            <span data-lang-i data-l="ru">Пакет + по запросу по району</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-icon" aria-hidden="true">⚡</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Runners & Missions</span>
+            <span data-lang data-l="en">Runners & Errands</span>
+            <span data-lang data-l="ru">Курьер и Поручения</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">Courses, achats, récupération de colis, démarches administratives, coordination d'artisans, gestion de RDV, accueil de prestataires, contrôle qualité sur place. Applicable dans tous contextes : résidentiel, entreprise, événementiel.</span>
+            <span data-lang data-l="en">Shopping, parcel collection, administrative errands, contractor coordination, appointment management, supplier reception, quality control. All contexts: residential, corporate, events.</span>
+            <span data-lang data-l="ru">Покупки, посылки, административные поручения, координация мастеров, запись на приёмы, встреча подрядчиков, контроль качества. Любой контекст.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">50€/heure + frais de mission au réel</span>
+            <span data-lang-i data-l="en">50€/hour + actual mission costs</span>
+            <span data-lang-i data-l="ru">50€/час + фактические расходы</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-icon" aria-hidden="true">🚗</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Transport VTC Privé</span>
+            <span data-lang data-l="en">Private Chauffeur</span>
+            <span data-lang data-l="ru">Частный Водитель</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">Chauffeur privé pour tous vos déplacements sur la Côte d'Azur. 100% clients directs — aucune plateforme intermédiaire. À la course ou mise à disposition. Aéroport Nice, Monaco Héliport, gares TGV, longues distances France entière.</span>
+            <span data-lang data-l="en">Private chauffeur for all your trips. 100% direct clients — no platform. Per trip or full day. Nice Airport, Monaco Heliport, TGV stations, all France.</span>
+            <span data-lang data-l="ru">Частный водитель. 100% прямые клиенты — без платформ. Разовые поездки или полный день. Аэропорт Ниццы, Монако, вокзалы TGV, вся Франция.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">2€/km + minimum selon secteur</span>
+            <span data-lang-i data-l="en">2€/km + minimum per area</span>
+            <span data-lang-i data-l="ru">2€/км + минимум по зоне</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">05</div>
+          <div class="service-icon" aria-hidden="true">🏢</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Conciergerie d'Entreprise</span>
+            <span data-lang data-l="en">Corporate Concierge</span>
+            <span data-lang data-l="ru">Корпоративный Консьерж</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">Forfaits mensuels pour PME de la Côte d'Azur. Transport collaborateurs et clients, disponibilité prioritaire 6h-22h, facturation mensuelle unique, rapport mensuel. Sophia-Antipolis, hôtels 4-5★, cliniques, cabinets, agences immobilières luxe.</span>
+            <span data-lang data-l="en">Monthly packages for Côte d'Azur businesses. Staff and client transport, priority availability 6am-10pm, single monthly invoice, monthly report. Sophia-Antipolis, 4-5★ hotels, clinics, law firms, luxury agencies.</span>
+            <span data-lang data-l="ru">Ежемесячные пакеты. Транспорт сотрудников и клиентов, доступность 6:00-22:00, единый счёт, ежемесячный отчёт. Sophia-Antipolis, отели 4-5★, клиники, юридические конторы.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">Forfait mensuel — Sur devis</span>
+            <span data-lang-i data-l="en">Monthly package — On quote</span>
+            <span data-lang-i data-l="ru">Ежемесячный пакет — По запросу</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">06</div>
+          <div class="service-icon" aria-hidden="true">✨</div>
+          <h3 class="service-title">
+            <span data-lang class="active" data-l="fr">Événementiel & Congrès</span>
+            <span data-lang data-l="en">Events & Congresses</span>
+            <span data-lang data-l="ru">Мероприятия и Конгрессы</span>
+          </h3>
+          <p class="service-desc">
+            <span data-lang class="active" data-l="fr">MIPIM (mars), Festival de Cannes (mai), MAPIC/MIPCOM (oct-nov), Roland-Garros relais. Transport délégations, navettes inter-hôtels, mise à disposition journée complète. Un client événementiel = un potentiel client annuel.</span>
+            <span data-lang data-l="en">MIPIM (March), Cannes Film Festival (May), MAPIC/MIPCOM (Oct-Nov), Roland-Garros relay. Delegation transport, inter-hotel shuttles, full-day availability. One event client = a potential annual client.</span>
+            <span data-lang data-l="ru">MIPIM, Каннский кинофестиваль, MAPIC/MIPCOM, Ролан Гаррос. Транспорт делегаций, маршрутки между отелями, полный день.</span>
+          </p>
+          <div class="service-price">
+            <span data-lang-i class="active" data-l="fr">Sur mesure — Tarif journée</span>
+            <span data-lang-i data-l="en">Bespoke — Day rate</span>
+            <span data-lang-i data-l="ru">Индивидуально — Дневной тариф</span>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Zones -->
+      <div class="zones-wrap">
+        <span class="section-label">
+          <span data-lang-i class="active" data-l="fr">Zones d'intervention</span>
+          <span data-lang-i data-l="en">Coverage areas</span>
+          <span data-lang-i data-l="ru">Зоны обслуживания</span>
+        </span>
+        <div class="zones-grid">
+          <div class="zone-pill">Cannes</div>
+          <div class="zone-pill">Nice</div>
+          <div class="zone-pill">Monaco</div>
+          <div class="zone-pill">Antibes</div>
+          <div class="zone-pill">Mougins</div>
+          <div class="zone-pill">Juan-les-Pins</div>
+          <div class="zone-pill">Sophia-Antipolis</div>
+          <div class="zone-pill">
+            <span data-lang-i class="active" data-l="fr">France entière</span>
+            <span data-lang-i data-l="en">All France</span>
+            <span data-lang-i data-l="ru">Вся Франция</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TARIFS ── -->
+  <section id="tarifs" class="section-pad" aria-labelledby="tarifs-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">
+          <span data-lang-i class="active" data-l="fr">Transparence totale</span>
+          <span data-lang-i data-l="en">Full transparency</span>
+          <span data-lang-i data-l="ru">Полная прозрачность</span>
+        </span>
+        <h2 class="section-title" id="tarifs-title">
+          <span data-lang class="active" data-l="fr">Nos <em>Tarifs</em></span>
+          <span data-lang data-l="en">Our <em>Rates</em></span>
+          <span data-lang data-l="ru">Наши <em>Тарифы</em></span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          <span data-lang class="active" data-l="fr">Aucune surprise. Tarifs fixes communiqués à l'avance. Tous les forfaits sont personnalisables.</span>
+          <span data-lang data-l="en">No surprises. Fixed rates communicated in advance. All packages are fully customisable.</span>
+          <span data-lang data-l="ru">Никаких сюрпризов. Фиксированные тарифы заранее. Все пакеты настраиваются.</span>
+        </p>
+      </div>
+
+      <div class="tarifs-grid">
+
+        <div class="tarif-card">
+          <div class="tarif-head">🚗
+            <span data-lang-i class="active" data-l="fr">Transport VTC — 2€/km</span>
+            <span data-lang-i data-l="en">Private Transport — 2€/km</span>
+            <span data-lang-i data-l="ru">Транспорт — 2€/км</span>
+          </div>
+          <div class="tarif-row"><span class="tarif-zone">Mougins</span><span class="tarif-val">min. 10€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Cannes</span><span class="tarif-val">min. 25€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Antibes</span><span class="tarif-val">min. 35€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Cagnes-sur-Mer</span><span class="tarif-val">min. 50€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Nice / Aéroport</span><span class="tarif-val">min. 60€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Monaco / Héliport</span><span class="tarif-val">min. 100€</span></div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Suivi vols temps réel. Attente incluse sur transferts aéroport. Tarifs fixes.</span>
+            <span data-lang data-l="en">Real-time flight tracking. Waiting included on airport transfers. Fixed rates.</span>
+            <span data-lang data-l="ru">Отслеживание рейсов. Ожидание включено. Фиксированные тарифы.</span>
+          </p>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-head">🔑
+            <span data-lang-i class="active" data-l="fr">Accueil / Sortie + Ménage</span>
+            <span data-lang-i data-l="en">Check-in / Check-out + Cleaning</span>
+            <span data-lang-i data-l="ru">Заезд / Выезд + Уборка</span>
+          </div>
+          <div class="tarif-row"><span class="tarif-zone">Mougins</span><span class="tarif-val">min. 250€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Cannes</span><span class="tarif-val">min. 300€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Nice</span><span class="tarif-val">min. 350€</span></div>
+          <div class="tarif-row"><span class="tarif-zone">Monaco</span><span class="tarif-val">min. 450€</span></div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Frais de ménage refacturés au réel en supplément.</span>
+            <span data-lang data-l="en">Cleaning costs billed additionally at actual cost.</span>
+            <span data-lang data-l="ru">Расходы на уборку дополнительно по факту.</span>
+          </p>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-head">⚡
+            <span data-lang-i class="active" data-l="fr">Runners & Gestion</span>
+            <span data-lang-i data-l="en">Runners & Management</span>
+            <span data-lang-i data-l="ru">Курьер и Управление</span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Taux horaire</span><span data-lang-i data-l="en">Hourly rate</span><span data-lang-i data-l="ru">Почасовая ставка</span></span>
+            <span class="tarif-val">50€/h</span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Frais de mission</span><span data-lang-i data-l="en">Mission costs</span><span data-lang-i data-l="ru">Расходы</span></span>
+            <span class="tarif-val"><span data-lang-i class="active" data-l="fr">Au réel</span><span data-lang-i data-l="en">At cost</span><span data-lang-i data-l="ru">По факту</span></span>
+          </div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Déplacements courts inclus. Supplément kilométrique sur devis si longue distance.</span>
+            <span data-lang data-l="en">Short trips included. Mileage supplement on quote for long distances.</span>
+            <span data-lang data-l="ru">Короткие поездки включены. Доплата за километраж по запросу.</span>
+          </p>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-head">🏠
+            <span data-lang-i class="active" data-l="fr">Gardiennage</span>
+            <span data-lang-i data-l="en">Caretaking</span>
+            <span data-lang-i data-l="ru">Охрана</span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Forfait Essentiel</span><span data-lang-i data-l="en">Essential Package</span><span data-lang-i data-l="ru">Базовый пакет</span></span>
+            <span class="tarif-val"><span data-lang-i class="active" data-l="fr">dès 400€/mois</span><span data-lang-i data-l="en">from 400€/mo</span><span data-lang-i data-l="ru">от 400€/мес</span></span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Sur mesure</span><span data-lang-i data-l="en">Bespoke</span><span data-lang-i data-l="ru">Индивидуально</span></span>
+            <span class="tarif-val"><span data-lang-i class="active" data-l="fr">Sur devis</span><span data-lang-i data-l="en">On quote</span><span data-lang-i data-l="ru">По запросу</span></span>
+          </div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Essentiel : 1 visite/semaine + courrier + 1 urgence offerte/mois. Personnalisable selon bien, secteur et fréquence.</span>
+            <span data-lang data-l="en">Essential: 1 visit/week + mail + 1 free emergency/month. Customisable by property, area and frequency.</span>
+            <span data-lang data-l="ru">Базовый: 1 визит/неделю + почта + 1 вызов/месяц бесплатно. Настраивается под объект и частоту.</span>
+          </p>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-head">🧺
+            <span data-lang-i class="active" data-l="fr">Gestion du Linge</span>
+            <span data-lang-i data-l="en">Linen Management</span>
+            <span data-lang-i data-l="ru">Управление Бельём</span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone">Pressing</span>
+            <span class="tarif-val"><span data-lang-i class="active" data-l="fr">Prix réel</span><span data-lang-i data-l="en">At cost</span><span data-lang-i data-l="ru">По факту</span></span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Équipe ménage</span><span data-lang-i data-l="en">Cleaning team</span><span data-lang-i data-l="ru">Команда</span></span>
+            <span class="tarif-val">2€/kg</span>
+          </div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Service transversal : résidentiel, Airbnb, entreprise, événementiel.</span>
+            <span data-lang data-l="en">Cross-context: residential, Airbnb, corporate, events.</span>
+            <span data-lang data-l="ru">Для всех контекстов: жилое, Airbnb, корпоративное, мероприятия.</span>
+          </p>
+        </div>
+
+        <div class="tarif-card">
+          <div class="tarif-head">🏢
+            <span data-lang-i class="active" data-l="fr">Conciergerie Entreprise</span>
+            <span data-lang-i data-l="en">Corporate Concierge</span>
+            <span data-lang-i data-l="ru">Корпоративный</span>
+          </div>
+          <div class="tarif-row">
+            <span class="tarif-zone"><span data-lang-i class="active" data-l="fr">Forfait mensuel</span><span data-lang-i data-l="en">Monthly package</span><span data-lang-i data-l="ru">Ежемесячный пакет</span></span>
+            <span class="tarif-val"><span data-lang-i class="active" data-l="fr">Sur devis</span><span data-lang-i data-l="en">On quote</span><span data-lang-i data-l="ru">По запросу</span></span>
+          </div>
+          <p class="tarif-note">
+            <span data-lang class="active" data-l="fr">Disponibilité 6h-22h garantie. Facturation mensuelle unique. Rapport mensuel. Tarif préférentiel.</span>
+            <span data-lang data-l="en">Availability 6am-10pm guaranteed. Single invoice. Monthly report. Preferential rate.</span>
+            <span data-lang data-l="ru">Доступность 6:00-22:00. Единый счёт. Ежемесячный отчёт. Льготный тариф.</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── À PROPOS ── -->
+  <section id="apropos" class="section-pad" aria-labelledby="apropos-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">
+          <span data-lang-i class="active" data-l="fr">Notre histoire</span>
+          <span data-lang-i data-l="en">Our story</span>
+          <span data-lang-i data-l="ru">Наша история</span>
+        </span>
+        <h2 class="section-title" id="apropos-title">
+          <span data-lang class="active" data-l="fr">Né d'un désir sincère <em>de servir</em></span>
+          <span data-lang data-l="en">Born from a sincere desire <em>to serve</em></span>
+          <span data-lang data-l="ru">Рождённый из желания <em>служить</em></span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+      </div>
+
+      <div class="apropos-grid">
+        <div>
+          <p class="apropos-text">
+            <span data-lang class="active" data-l="fr">Haven n'est pas né d'une opportunité business. Il est né d'un désir sincère de servir. Tout a commencé sur la route, en tant que chauffeur VTC privé. Jour après jour, Théo a rencontré des entrepreneurs, des familles et des voyageurs qui partageaient tous la même difficulté : le manque de temps, de soutien fiable, et le besoin de quelqu'un en qui ils pourraient vraiment avoir confiance.</span>
+            <span data-lang data-l="en">Haven was not born from a business opportunity. It was born from a sincere desire to serve. It all started on the road, as a private chauffeur. Day after day, Théo met entrepreneurs, families and travellers who all shared the same difficulty: lack of time, reliable support, and the need for someone they could truly trust.</span>
+            <span data-lang data-l="ru">Haven родился не из бизнес-возможности. Он родился из искреннего желания служить. Всё началось на дороге в роли частного водителя. День за днём Тео встречал предпринимателей, семьи и путешественников с одной трудностью: нехватка времени, надёжной поддержки и потребность в ком-то, кому можно по-настоящему доверять.</span>
+          </p>
+          <p class="apropos-text">
+            <span data-lang class="active" data-l="fr">Construit en famille avec sa mère, Haven a grandi dans le monde réel de l'entrepreneuriat — sans raccourcis. Chaque client satisfait, chaque problème résolu, a permis de construire quelque chose de plus solide, basé sur la confiance, la constance et l'attention portée aux autres.</span>
+            <span data-lang data-l="en">Built as a family venture with his mother, Haven grew in the real world of entrepreneurship — without shortcuts. Every satisfied client, every problem solved, helped build something more solid, based on trust, consistency and genuine care for others.</span>
+            <span data-lang data-l="ru">Созданный вместе с матерью, Haven вырос в реальном мире предпринимательства — без shortcuts. Каждый довольный клиент, каждая решённая проблема помогали строить нечто прочное: доверие, постоянство, забота о других.</span>
+          </p>
+          <a href="#contact" class="btn-primary" style="margin-top:18px;">
+            <span data-lang-i class="active" data-l="fr">Travailler avec nous</span>
+            <span data-lang-i data-l="en">Work with us</span>
+            <span data-lang-i data-l="ru">Работать с нами</span>
+          </a>
+        </div>
+
+        <ul role="list">
+          <li class="valeur-item">
+            <div class="valeur-icon" aria-hidden="true">◈</div>
+            <div>
+              <div class="valeur-name">
+                <span data-lang-i class="active" data-l="fr">Relation directe</span>
+                <span data-lang-i data-l="en">Direct relationship</span>
+                <span data-lang-i data-l="ru">Прямые отношения</span>
+              </div>
+              <p class="valeur-desc">
+                <span data-lang class="active" data-l="fr">Théo = seul interlocuteur. Pas de sous-traitant, pas de plateforme intermédiaire pour les clients Haven.</span>
+                <span data-lang data-l="en">Théo = single point of contact. No subcontractor, no intermediary platform for Haven clients.</span>
+                <span data-lang data-l="ru">Тео = единственный контакт. Без субподрядчиков, без посреднических платформ.</span>
+              </p>
+            </div>
+          </li>
+          <li class="valeur-item">
+            <div class="valeur-icon" aria-hidden="true">◈</div>
+            <div>
+              <div class="valeur-name">
+                <span data-lang-i class="active" data-l="fr">Ponctualité absolue</span>
+                <span data-lang-i data-l="en">Absolute punctuality</span>
+                <span data-lang-i data-l="ru">Абсолютная пунктуальность</span>
+              </div>
+              <p class="valeur-desc">
+                <span data-lang class="active" data-l="fr">Votre temps est précieux. Haven est là avant vous. Toujours.</span>
+                <span data-lang data-l="en">Your time is precious. Haven is there before you. Always.</span>
+                <span data-lang data-l="ru">Ваше время драгоценно. Haven уже там до вашего прихода. Всегда.</span>
+              </p>
+            </div>
+          </li>
+          <li class="valeur-item">
+            <div class="valeur-icon" aria-hidden="true">◈</div>
+            <div>
+              <div class="valeur-name">
+                <span data-lang-i class="active" data-l="fr">Discrétion totale</span>
+                <span data-lang-i data-l="en">Total discretion</span>
+                <span data-lang-i data-l="ru">Полная конфиденциальность</span>
+              </div>
+              <p class="valeur-desc">
+                <span data-lang class="active" data-l="fr">Confidentialité absolue sur vos déplacements, vos biens et vos activités.</span>
+                <span data-lang data-l="en">Absolute confidentiality on your movements, assets and activities.</span>
+                <span data-lang data-l="ru">Абсолютная конфиденциальность ваших передвижений, имущества и деятельности.</span>
+              </p>
+            </div>
+          </li>
+          <li class="valeur-item">
+            <div class="valeur-icon" aria-hidden="true">◈</div>
+            <div>
+              <div class="valeur-name">
+                <span data-lang-i class="active" data-l="fr">Constance</span>
+                <span data-lang-i data-l="en">Consistency</span>
+                <span data-lang-i data-l="ru">Постоянство</span>
+              </div>
+              <p class="valeur-desc">
+                <span data-lang class="active" data-l="fr">Même qualité de service, qu'il s'agisse du 1er ou du 100e trajet.</span>
+                <span data-lang data-l="en">Same quality of service, whether it is the 1st or the 100th trip.</span>
+                <span data-lang data-l="ru">Одинаковое качество, будь то 1-я или 100-я поездка.</span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section-pad" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">
+          <span data-lang-i class="active" data-l="fr">Parlons-en</span>
+          <span data-lang-i data-l="en">Let's talk</span>
+          <span data-lang-i data-l="ru">Давайте поговорим</span>
+        </span>
+        <h2 class="section-title" id="contact-title">
+          <span data-lang class="active" data-l="fr">Nous <em>Contacter</em></span>
+          <span data-lang data-l="en"><em>Contact</em> Us</span>
+          <span data-lang data-l="ru"><em>Связаться</em> с нами</span>
+        </h2>
+        <div class="section-rule" aria-hidden="true"></div>
+        <p class="section-desc">
+          <span data-lang class="active" data-l="fr">Réponse garantie sous 2h. WhatsApp privilégié pour les demandes urgentes.</span>
+          <span data-lang data-l="en">Guaranteed response within 2 hours. WhatsApp preferred for urgent requests.</span>
+          <span data-lang data-l="ru">Гарантированный ответ в течение 2 часов. WhatsApp предпочтителен для срочных запросов.</span>
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div>
+          <div class="contact-block-title">
+            <span data-lang-i class="active" data-l="fr">Coordonnées</span>
+            <span data-lang-i data-l="en">Contact details</span>
+            <span data-lang-i data-l="ru">Контактные данные</span>
+          </div>
+
+          <address style="font-style:normal;">
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">📱</div>
+              <div>
+                <span class="contact-label">WhatsApp / Tél</span>
+                <div class="contact-val"><a href="https://wa.me/33679462165" target="_blank" rel="noopener">+33 6 79 46 21 65</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">✉️</div>
+              <div>
+                <span class="contact-label">Email</span>
+                <div class="contact-val"><a href="mailto:contact@havenconciergerie.com">contact@havenconciergerie.com</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">🌐</div>
+              <div>
+                <span class="contact-label">Site</span>
+                <div class="contact-val"><a href="https://havenconciergerie.com" target="_blank" rel="noopener">havenconciergerie.com</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">📍</div>
+              <div>
+                <span class="contact-label">
+                  <span data-lang-i class="active" data-l="fr">Zone principale</span>
+                  <span data-lang-i data-l="en">Main area</span>
+                  <span data-lang-i data-l="ru">Основная зона</span>
+                </span>
+                <div class="contact-val">Cannes, Côte d'Azur</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">🕐</div>
+              <div>
+                <span class="contact-label">
+                  <span data-lang-i class="active" data-l="fr">Disponibilité</span>
+                  <span data-lang-i data-l="en">Availability</span>
+                  <span data-lang-i data-l="ru">Доступность</span>
+                </span>
+                <div class="contact-val">7j/7</div>
+              </div>
+            </div>
+          </address>
+
+          <div class="contact-actions">
+            <a href="https://wa.me/33679462165" target="_blank" rel="noopener"
+               class="btn-whatsapp" aria-label="Contacter Haven sur WhatsApp">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span data-lang-i class="active" data-l="fr">Écrire sur WhatsApp</span>
+              <span data-lang-i data-l="en">Message on WhatsApp</span>
+              <span data-lang-i data-l="ru">Написать в WhatsApp</span>
+            </a>
+            <a href="mailto:contact@havenconciergerie.com" class="btn-email"
+               aria-label="Envoyer un email à Haven">
+              <span aria-hidden="true">✉</span>
+              <span data-lang-i class="active" data-l="fr">Envoyer un email</span>
+              <span data-lang-i data-l="en">Send an email</span>
+              <span data-lang-i data-l="ru">Отправить email</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-title">
+            <span data-lang-i class="active" data-l="fr">Comment ça marche ?</span>
+            <span data-lang-i data-l="en">How does it work?</span>
+            <span data-lang-i data-l="ru">Как это работает?</span>
+          </div>
+          <div class="live-badge">
+            <div class="live-dot" aria-hidden="true"></div>
+            <span data-lang-i class="active" data-l="fr">Réponse garantie sous 2h</span>
+            <span data-lang-i data-l="en">Reply guaranteed within 2h</span>
+            <span data-lang-i data-l="ru">Ответ в течение 2 часов</span>
+          </div>
+          <div class="contact-card-text">
+            <span data-lang class="active" data-l="fr">
+              <strong>1.</strong> Contactez-nous via WhatsApp ou email en décrivant votre besoin.<br><br>
+              <strong>2.</strong> Théo vous répond personnellement sous 2h.<br><br>
+              <strong>3.</strong> Nous définissons ensemble la prestation et le tarif.<br><br>
+              <strong>4.</strong> Haven intervient sur le terrain avec la même qualité à chaque fois.
+            </span>
+            <span data-lang data-l="en">
+              <strong>1.</strong> Contact us via WhatsApp or email describing your need.<br><br>
+              <strong>2.</strong> Théo replies personally within 2h.<br><br>
+              <strong>3.</strong> We define together the right service and rate.<br><br>
+              <strong>4.</strong> Haven acts on the ground with the same quality every time.
+            </span>
+            <span data-lang data-l="ru">
+              <strong>1.</strong> Свяжитесь с нами через WhatsApp или email.<br><br>
+              <strong>2.</strong> Тео лично ответит в течение 2 часов.<br><br>
+              <strong>3.</strong> Совместно определяем услугу и тариф.<br><br>
+              <strong>4.</strong> Haven действует на месте с неизменным качеством.
+            </span>
+          </div>
+          <div class="contact-footer-note">
+            <span data-lang class="active" data-l="fr">Haven SAS · SIRET 914413554 RCS GRASSE<br>Côte d'Azur, France</span>
+            <span data-lang data-l="en">Haven SAS · SIRET 914413554 RCS GRASSE<br>French Riviera, France</span>
+            <span data-lang data-l="ru">Haven SAS · SIRET 914413554 RCS GRASSE<br>Лазурный берег, Франция</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PARRAINAGE — STRUCTURE PRÊTE (CACHÉE)
+       Pour activer dans le futur :
+       1. Retirer display:none dans le CSS #parrainage
+       2. Créer un formulaire sur tally.so
+       3. Remplacer LIEN_TALLY_ICI par l'URL
+  ═══════════════════════════════════════ -->
+  <section id="parrainage" aria-labelledby="parrainage-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Programme Haven</span>
+        <h2 class="section-title" id="parrainage-title">
+          <em>Parrainez</em> un proche
+        </h2>
+        <div class="section-rule"></div>
+        <p class="section-desc">
+          Chaque client Haven qui recommande un nouveau client reçoit un avantage exclusif.
+          Simple, direct, sans plateforme.
+        </p>
+      </div>
+      <div style="text-align:center; margin-top:40px;">
+        <!-- Remplacer par iframe Tally ou lien direct quand prêt -->
+        <a href="LIEN_TALLY_ICI" target="_blank" class="btn-primary">
+          Participer au programme
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════
      FOOTER
-═══════════════════════════════ -->
-<footer>
-  <div class="footer-logo">HAVEN</div>
+═══════════════════════════════════════ -->
+<footer role="contentinfo">
+  <div class="footer-logo" aria-label="Haven">HAVEN</div>
   <div class="footer-sub">Conciergerie & Transport — French Riviera</div>
-  <ul class="footer-links">
-    <li><a href="#accueil">
-      <span data-lang-inline class="active" data-l="fr">Accueil</span>
-      <span data-lang-inline data-l="en">Home</span>
-      <span data-lang-inline data-l="ru">Главная</span>
-    </a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#tarifs">
-      <span data-lang-inline class="active" data-l="fr">Tarifs</span>
-      <span data-lang-inline data-l="en">Rates</span>
-      <span data-lang-inline data-l="ru">Тарифы</span>
-    </a></li>
-    <li><a href="#apropos">
-      <span data-lang-inline class="active" data-l="fr">À propos</span>
-      <span data-lang-inline data-l="en">About</span>
-      <span data-lang-inline data-l="ru">О нас</span>
-    </a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 Haven SAS — SIRET 914413554 RCS GRASSE — Tous droits réservés</div>
+  <nav class="footer-nav" aria-label="Navigation secondaire">
+    <a href="#accueil"><span data-lang-i class="active" data-l="fr">Accueil</span><span data-lang-i data-l="en">Home</span><span data-lang-i data-l="ru">Главная</span></a>
+    <a href="#services">Services</a>
+    <a href="#tarifs"><span data-lang-i class="active" data-l="fr">Tarifs</span><span data-lang-i data-l="en">Rates</span><span data-lang-i data-l="ru">Тарифы</span></a>
+    <a href="#apropos"><span data-lang-i class="active" data-l="fr">À propos</span><span data-lang-i data-l="en">About</span><span data-lang-i data-l="ru">О нас</span></a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <p class="footer-copy">© 2026 Haven SAS — SIRET 914413554 RCS GRASSE — Tous droits réservés</p>
 </footer>
 
-<!-- ═══════════════════════════════
-     WHATSAPP FLOAT
-═══════════════════════════════ -->
-<a href="https://wa.me/33679462165" class="whatsapp-float" target="_blank" title="WhatsApp Haven">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<!-- WhatsApp float -->
+<a href="https://wa.me/33679462165" class="wa-float"
+   target="_blank" rel="noopener" aria-label="WhatsApp Haven">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
 
-<!-- ═══════════════════════════════
+<!-- ═══════════════════════════════════════
      JAVASCRIPT
-═══════════════════════════════ -->
+═══════════════════════════════════════ -->
 <script>
-  // ─── LANGUE ───
-  let currentLang = 'fr';
+// ── LANGUE ──────────────────────────────
+let lang = 'fr';
 
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.classList.toggle('active', el.getAttribute('data-l') === lang);
-    });
-    document.querySelectorAll('[data-lang-inline]').forEach(el => {
-      el.classList.toggle('active', el.getAttribute('data-l') === lang);
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      const t = btn.textContent.trim().toLowerCase();
-      btn.classList.toggle('active',
-        (lang === 'fr' && t === 'fr') ||
-        (lang === 'en' && t === 'en') ||
-        (lang === 'ru' && t === 'ру')
-      );
-    });
-    document.documentElement.lang = lang;
-  }
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('[data-lang]').forEach(el =>
+    el.classList.toggle('active', el.dataset.l === l));
+  document.querySelectorAll('[data-lang-i]').forEach(el =>
+    el.classList.toggle('active', el.dataset.l === l));
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const t = btn.textContent.trim().toLowerCase();
+    btn.classList.toggle('active',
+      (l==='fr'&&t==='fr')||(l==='en'&&t==='en')||(l==='ru'&&t==='ру'));
+  });
+  document.documentElement.lang = l;
+}
 
-  // ─── MENU MOBILE ───
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
+// ── NAVIGATION ──────────────────────────
+const nav = document.getElementById('nav');
 
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+function toggleMenu() {
+  const links = document.getElementById('navLinks');
+  const btn   = document.getElementById('hamburger');
+  const open  = links.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+}
+
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  })
+);
+
+// ── SMOOTH SCROLL ───────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+  });
+});
+
+// ── GSAP ANIMATIONS ─────────────────────
+window.addEventListener('load', () => {
+  if (typeof gsap === 'undefined') return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero — entrée séquentielle
+  const hero = document.getElementById('heroContent');
+  hero.style.visibility = 'visible';
+
+  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  heroTl
+    .from('.hero-badge',    { y: 24, opacity: 0, duration: 0.7 })
+    .from('.hero-logo',     { y: 20, opacity: 0, duration: 0.6, scale: 0.96 }, '-=0.3')
+    .from('.hero-title',    { y: 30, opacity: 0, duration: 0.7 }, '-=0.3')
+    .from('.hero-subtitle', { y: 20, opacity: 0, duration: 0.6 }, '-=0.4')
+    .from('.hero-line',     { scaleX: 0, opacity: 0, duration: 0.5, transformOrigin: 'center' }, '-=0.3')
+    .from('.hero-tagline',  { y: 20, opacity: 0, duration: 0.7 }, '-=0.3')
+    .from('.hero-actions > *', { y: 18, opacity: 0, duration: 0.5, stagger: 0.12 }, '-=0.4')
+    .from('.stat',          { y: 16, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.3');
+
+  // Cards — apparition au scroll
+  gsap.utils.toArray('.service-card').forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+      y: 40, opacity: 0, duration: 0.65,
+      delay: (i % 3) * 0.1,
+      ease: 'power2.out'
     });
   });
 
-  // ─── SMOOTH SCROLL ───
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-      }
+  gsap.utils.toArray('.tarif-card').forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+      y: 30, opacity: 0, duration: 0.6,
+      delay: (i % 3) * 0.08,
+      ease: 'power2.out'
     });
   });
 
-  // ─── NAV SCROLL ───
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    const mobile = window.innerWidth <= 900;
-    if (window.scrollY > 60) {
-      nav.style.padding = mobile ? '12px 20px' : '12px 60px';
-      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.4)';
-    } else {
-      nav.style.padding = mobile ? '14px 20px' : '18px 60px';
-      nav.style.boxShadow = 'none';
-    }
-  });
-
-  // ─── ANIMATIONS ───
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
+  // Sections headers
+  gsap.utils.toArray('.section-head').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+      y: 28, opacity: 0, duration: 0.7, ease: 'power2.out'
     });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.service-card, .tarif-block, .valeur-item, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(22px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
   });
+
+  // À propos
+  gsap.utils.toArray('.valeur-item').forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+      x: 24, opacity: 0, duration: 0.55,
+      delay: i * 0.1, ease: 'power2.out'
+    });
+  });
+
+  // Contact
+  gsap.from('.contact-card', {
+    scrollTrigger: { trigger: '.contact-card', start: 'top 88%', toggleActions: 'play none none none' },
+    y: 30, opacity: 0, duration: 0.7, ease: 'power2.out'
+  });
+
+  // Zones
+  gsap.utils.toArray('.zone-pill').forEach((el, i) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' },
+      y: 16, opacity: 0, duration: 0.45,
+      delay: i * 0.06, ease: 'power1.out'
+    });
+  });
+});
+
+// Fallback si GSAP pas encore chargé (premier scroll)
+document.getElementById('heroContent').style.visibility = 'visible';
 </script>
 
 </body>
 </html>
+```
+
+---
+
+**Créez aussi ces 2 fichiers dans votre repo GitHub :**
+
+**`robots.txt`**
+```
+User-agent: *
+Allow: /
+Sitemap: https://havenconciergerie.com/sitemap.xml
